@@ -71,4 +71,10 @@ public abstract class Person {
                 + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + '}';
     }
 
+    public String nameToString() {
+        // This methods returns only the first and last name of the person, used in some
+        // methods
+        return this.firstName + " " + this.lastName;
+    }
+
 }
