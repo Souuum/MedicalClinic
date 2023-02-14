@@ -1,4 +1,4 @@
-package MedicalClinic;
+package MedicalClinic.Classes;
 
 /**
  *  @author Souuum
