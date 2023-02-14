@@ -3,6 +3,9 @@ package MedicalClinic.Classes;
 /**
  * @author Souuum
  */
+
+import java.util.Date;
+
 public class Patient extends Person {
 
     private String insuranceCompany;
