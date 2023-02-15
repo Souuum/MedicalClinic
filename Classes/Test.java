@@ -26,6 +26,7 @@ public class Test {
         Billing b = new Billing(p);
         b.addService("Consultation médecin généraliste", 19.9);
         p.addBilling(b);
+        p.removeBilling(b);
         System.out.println(p.listBillings());
     }
 
