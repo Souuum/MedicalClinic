@@ -31,9 +31,7 @@ public class Patient extends Person {
     }
 
     public void makeAppointment(Patient patient, Doctor doctor, Date date, String typeAppointment) {
-        // TODO
         
-
     }
 
     @Override
