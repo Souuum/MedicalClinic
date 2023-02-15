@@ -1,4 +1,4 @@
-package MedicalClinic.Classes;
+package Classes;
 
 /**
  * @author Souuum
@@ -24,6 +24,12 @@ public class Patient extends Person {
 
     public void setInsuranceCompany(String insuranceCompany) {
         this.insuranceCompany = insuranceCompany;
+    }
+
+    public static void toJSON(Patient p) {
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = ow.writeValueAsString(p);
+        System.out.println(json);
     }
 
     @Override
