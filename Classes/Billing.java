@@ -10,10 +10,12 @@ public class Billing {
     public Billing() {
     }
 
-    public Billing(Patient p) {
+    public Billing(Patient p, Appointment a, Double c) {
         setPatient(p);
         services = new ArrayList<>();
         costs = new ArrayList<>();
+        services.add(a.getTreatment().getName());
+        costs.add(c);
     }
 
     public Patient getPatient() {

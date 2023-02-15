@@ -23,11 +23,11 @@ public class Test {
 
         System.out.println("Test by adding a billing");
         System.out.println("-------------------------------");
-        Billing b = new Billing(p);
+        Billing b = new Billing(p, a, 10.0);
         b.addService("Consultation médecin généraliste", 19.9);
         p.addBilling(b);
-        p.removeBilling(b);
         System.out.println(p.listBillings());
+        System.out.println(b.getTotalCost());
     }
 
 }
