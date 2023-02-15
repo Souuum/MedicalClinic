@@ -12,16 +12,18 @@ public class Drugs {
     private String description;
     double price;
     private int quantity;
+    private int frequency;
     private Date expirationDate;
 
     public Drugs() {
     }
 
-    public Drugs(String n, String d, double p, int q, Date e) {
+    public Drugs(String n, String d, double p, int q, int f, Date e) {
         setName(n);
         setDescription(d);
         setPrice(p);
         setQuantity(q);
+        setFrequency(f);
         setExpirationDate(e);
     }
 
@@ -57,7 +59,7 @@ public class Drugs {
         this.description = description;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
@@ -71,6 +73,22 @@ public class Drugs {
             return;
         }
         this.price = price;
+    }
+
+    public int getFrequency() {
+        return this.frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        try {
+            if (frequency < 1) {
+                throw new ArithmeticException();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error: Frequency can't be null or negative in constructor");
+            return;
+        }
+        this.frequency = frequency;
     }
 
     public double getQuantity() {
@@ -108,8 +126,8 @@ public class Drugs {
     @Override
     public String toString() {
         return "Drugs{" + "name=" + name + ", description=" + description + ", price=" + price + ", quantity="
-                + quantity
-                + ", expirationDate=" + expirationDate + '}';
+                + quantity + ", frequency=" + frequency
+                + "/day, expirationDate=" + expirationDate + '}';
     }
 
 }

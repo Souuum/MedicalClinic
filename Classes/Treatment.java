@@ -108,7 +108,7 @@ public class Treatment {
         this.date = date;
     }
 
-    public Date getDuration() {
+    public String getDuration() {
         return this.duration;
     }
 
@@ -142,8 +142,8 @@ public class Treatment {
         }
     }
 
-    public Hashset<Drugs> getDrugsList() {
-        return this.Drugs;
+    public HashSet<Drugs> getDrugsList() {
+        return this.drugs;
     }
 
     public void addDrugs(Drugs d) {
