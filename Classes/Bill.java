@@ -4,7 +4,6 @@
  */
 
 import java.util.Date;
-
 public class Bill extends Treatment {
 
     private Treatment treatment;

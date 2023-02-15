@@ -1,5 +1,4 @@
 public class Appointment {
-
     private Treatment treatment;
     private Date date;
     private String time;
