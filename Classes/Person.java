@@ -18,11 +18,11 @@ public abstract class Person {
     }
 
     public Person(String f, String l, String s, Date d, String p) {
-        this.firstName = f;
-        this.lastName = l;
-        this.socialNumber = s;
-        this.birthDate = d;
-        this.phoneNumber = p;
+        setFirstName(f);
+        setLastName(l);
+        setSocialNumber(s);
+        setBirthDate(d);
+        setPhoneNumber(p);
     }
 
     public String getFirstName() {
@@ -30,6 +30,10 @@ public abstract class Person {
     }
 
     public void setFirstName(String firstName) {
+        // exception handling
+        if (firstName == null || firstName.isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be empty");
+        }
         this.firstName = firstName;
     }
 
@@ -38,6 +42,10 @@ public abstract class Person {
     }
 
     public void setLastName(String lastName) {
+        // exception handling
+        if (lastName == null || lastName.isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be empty");
+        }
         this.lastName = lastName;
     }
 
@@ -46,6 +54,10 @@ public abstract class Person {
     }
 
     public void setSocialNumber(String socialNumber) {
+        // exception handling
+        if (socialNumber == null || socialNumber.isEmpty()) {
+            throw new IllegalArgumentException("Social number cannot be empty");
+        }
         this.socialNumber = socialNumber;
     }
 
@@ -54,6 +66,10 @@ public abstract class Person {
     }
 
     public void setBirthDate(Date birthDate) {
+        // exception handling
+        if (birthDate == null) {
+            throw new IllegalArgumentException("Birth date cannot be empty");
+        }
         this.birthDate = birthDate;
     }
 
@@ -62,6 +78,10 @@ public abstract class Person {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        // exception handling
+        if (phoneNumber == null || phoneNumber.isEmpty()) {
+            throw new IllegalArgumentException("Phone number cannot be empty");
+        }
         this.phoneNumber = phoneNumber;
     }
 

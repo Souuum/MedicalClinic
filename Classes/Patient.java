@@ -15,7 +15,7 @@ public class Patient extends Person {
 
     public Patient(String f, String l, String s, Date d, String p, String i) {
         super(f, l, s, d, p);
-        this.insuranceCompany = i;
+        setInsuranceCompany(i);
     }
 
     public String getInsuranceCompany() {
@@ -23,7 +23,17 @@ public class Patient extends Person {
     }
 
     public void setInsuranceCompany(String insuranceCompany) {
+        // exception handling
+        if (insuranceCompany == null || insuranceCompany.isEmpty()) {
+            throw new IllegalArgumentException("Insurance company cannot be empty");
+        }
         this.insuranceCompany = insuranceCompany;
+    }
+
+    public void makeAppointment(Patient patient, Doctor doctor, Date date, String typeAppointment) {
+        // TODO
+        
+
     }
 
     @Override

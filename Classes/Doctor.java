@@ -15,7 +15,7 @@ public class Doctor extends Person {
 
     public Doctor(String f, String l, String s, Date d, String p, String i, String sp) {
         super(f, l, s, d, p);
-        this.specialty = sp;
+        setSpecialty(sp);
     }
 
     public String getSpecialty() {
@@ -23,7 +23,10 @@ public class Doctor extends Person {
     }
 
     public void setSpecialty(String specialty) {
-        this.specialty = specialty;
+        if (specialty == null || specialty.isEmpty()) {
+            throw new IllegalArgumentException("Specialty cannot be empty");
+        }
+        this.specialty = specialty; 
     }
 
     @Override
