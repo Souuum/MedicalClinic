@@ -1,4 +1,4 @@
-package MedicalClinic.Classes;
+package Classes;
 
 /**
  * @author Souuum
@@ -33,7 +33,7 @@ public class Doctor extends Person {
         }
         this.specialty = specialty;
     }
-
+    
     @Override
     public String toString() {
         return "Doctor{" + "firstName=" + firstName + ", lastName=" + lastName + ", socialNumber=" + socialNumber

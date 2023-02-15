@@ -1,19 +1,27 @@
+package Classes;
+
+import java.util.Date;
+
 public class Appointment {
     private Treatment treatment;
     private Date date;
     private String time;
     private String location;
     private String notes;
+    private Doctor doctor;
+    private Patient patient;
 
     public Appointment() {
     }
 
-    public Appointment(Treatment t, Date d, String time, String location, String notes) {
+    public Appointment(Treatment t, Date d, String ti, String l, String n, Doctor doc, Patient pat) {
         setTreatment(t);
         setDate(d);
-        setTime(time);
-        setLocation(location);
-        setNotes(notes);
+        setTime(ti);
+        setLocation(l);
+        setNotes(n);
+        setDoctor(doc);
+        setPatient(pat);
     }
 
     public Treatment getTreatment() {
@@ -96,10 +104,43 @@ public class Appointment {
         this.notes = notes;
     }
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        try {
+            if (doctor == null) {
+                throw new IllegalArgumentException("Doctor cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        try {
+            if (patient == null) {
+                throw new IllegalArgumentException("Patient cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        this.patient = patient;
+    }
+
     @Override
+
     public String toString() {
         return "Appointment{" + "treatment=" + treatment + ", date=" + date + ", time=" + time + ", location="
-                + location + ", notes=" + notes + '}';
+                + location + ", notes=" + notes + ", doctor=" + doctor + '}';
     }
 
 }
