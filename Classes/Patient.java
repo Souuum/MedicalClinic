@@ -24,14 +24,16 @@ public class Patient extends Person {
 
     public void setInsuranceCompany(String insuranceCompany) {
         // exception handling
-        if (insuranceCompany == null || insuranceCompany.isEmpty()) {
-            throw new IllegalArgumentException("Insurance company cannot be empty");
+
+        try {
+            if (insuranceCompany == null || insuranceCompany.isEmpty()) {
+                throw new IllegalArgumentException("Insurance company cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
         }
         this.insuranceCompany = insuranceCompany;
-    }
-
-    public void makeAppointment(Patient patient, Doctor doctor, Date date, String typeAppointment) {
-        
     }
 
     @Override

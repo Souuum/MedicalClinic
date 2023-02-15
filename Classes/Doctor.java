@@ -23,10 +23,15 @@ public class Doctor extends Person {
     }
 
     public void setSpecialty(String specialty) {
-        if (specialty == null || specialty.isEmpty()) {
-            throw new IllegalArgumentException("Specialty cannot be empty");
+        try {
+            if (specialty == null || specialty.isEmpty()) {
+                throw new IllegalArgumentException("Specialty cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
         }
-        this.specialty = specialty; 
+        this.specialty = specialty;
     }
 
     @Override
