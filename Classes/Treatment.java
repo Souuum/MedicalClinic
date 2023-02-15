@@ -1,10 +1,7 @@
-package MedicalClinic.Classes;
-
-/**
- * @author Souuum
- */
+package Classes;
 
 import java.util.Date;
+import java.util.HashSet;
 
 public class Treatment {
 
@@ -15,6 +12,7 @@ public class Treatment {
     private Date date;
     private Date dateEnd;
     private String duration = "";
+    private HashSet<Drugs> drugs = new HashSet<Drugs>();
 
     public Treatment() {
     }
@@ -144,11 +142,34 @@ public class Treatment {
         }
     }
 
+    public Hashset<Drugs> getDrugsList() {
+        return this.Drugs;
+    }
+
+    public void addDrugs(Drugs d) {
+        try {
+            if (d == null) {
+                throw new NullPointerException("Drugs can't be null");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return;
+        }
+        try {
+            if (this.drugs.add(d) != true) {
+                throw new ArrayStoreException(" Drugs already in list");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return;
+        }
+    }
+
     @Override
     public String toString() {
         return "Treatment{" + "name=" + name + ", description=" + description + ", doctor=" + doctor.nameToString()
                 + ", patient="
-                + patient.nameToString() + ", date=" + date + ", duration=" + duration + '}';
+                + patient.nameToString() + ", date=" + date + ", duration=" + duration + ", drugs=" + drugs + '}';
     }
 
 }
