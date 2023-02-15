@@ -31,8 +31,13 @@ public abstract class Person {
 
     public void setFirstName(String firstName) {
         // exception handling
-        if (firstName == null || firstName.isEmpty()) {
-            throw new IllegalArgumentException("First name cannot be empty");
+        try {
+            if (firstName == null || firstName.isEmpty()) {
+                throw new IllegalArgumentException("First name cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
         }
         this.firstName = firstName;
     }
@@ -43,8 +48,13 @@ public abstract class Person {
 
     public void setLastName(String lastName) {
         // exception handling
-        if (lastName == null || lastName.isEmpty()) {
-            throw new IllegalArgumentException("Last name cannot be empty");
+        try {
+            if (lastName == null || lastName.isEmpty()) {
+                throw new IllegalArgumentException("Last name cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
         }
         this.lastName = lastName;
     }
@@ -55,8 +65,13 @@ public abstract class Person {
 
     public void setSocialNumber(String socialNumber) {
         // exception handling
-        if (socialNumber == null || socialNumber.isEmpty()) {
-            throw new IllegalArgumentException("Social number cannot be empty");
+        try {
+            if (socialNumber == null || socialNumber.isEmpty()) {
+                throw new IllegalArgumentException("Social number cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
         }
         this.socialNumber = socialNumber;
     }
@@ -67,8 +82,13 @@ public abstract class Person {
 
     public void setBirthDate(Date birthDate) {
         // exception handling
-        if (birthDate == null) {
-            throw new IllegalArgumentException("Birth date cannot be empty");
+        try {
+            if (birthDate == null) {
+                throw new IllegalArgumentException("Birth date cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
         }
         this.birthDate = birthDate;
     }
@@ -79,8 +99,13 @@ public abstract class Person {
 
     public void setPhoneNumber(String phoneNumber) {
         // exception handling
-        if (phoneNumber == null || phoneNumber.isEmpty()) {
-            throw new IllegalArgumentException("Phone number cannot be empty");
+        try {
+            if (phoneNumber == null || phoneNumber.isEmpty()) {
+                throw new IllegalArgumentException("Phone number cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
         }
         this.phoneNumber = phoneNumber;
     }
