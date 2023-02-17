@@ -36,6 +36,10 @@ public class Doctor extends Person {
         this.schedule = schedule;
     }
 
+    public String getScheduleString() {
+        return this.getName() + "'s schedule\n" + this.schedule.toString();
+    }
+
     @Override
     public String toString() {
         return "Doctor{" + "firstName=" + firstName + ", lastName=" + lastName + ", socialNumber=" + socialNumber

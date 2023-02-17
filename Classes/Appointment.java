@@ -108,8 +108,8 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment [date=" + date + ", day=" + day + ", doctor=" + doctor + ", hour=" + hour + ", patient="
-                + patient + "]";
+        return "[" + this.date + ", at " + +this.hour + "h, doctor=" + doctor.getName() + ", patient="
+                + patient.getName() + "]";
     }
 
 }
