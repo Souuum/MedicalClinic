@@ -2,6 +2,7 @@ package Classes;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.text.SimpleDateFormat;
 
 public class Treatment {
 
@@ -9,8 +10,9 @@ public class Treatment {
     private String description;
     private Doctor doctor;
     private Patient patient;
-    private Date date;
-    private Date dateEnd;
+    private java.text.SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private String date;
+    private String dateEnd;
     private String duration = "";
     private HashSet<Drugs> drugs = new HashSet<Drugs>();
 
@@ -23,8 +25,7 @@ public class Treatment {
         setDoctor(doc);
         setPatient(pat);
         setDate(da);
-        setDuration(de);
-        setDuration();
+        setDuration(da, de);
     }
 
     public String getName() {
@@ -92,7 +93,7 @@ public class Treatment {
         this.patient = patient;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return this.date;
     }
 
@@ -105,30 +106,14 @@ public class Treatment {
             System.out.println("Error: Null value in Treatment constructor");
             return;
         }
-        this.date = date;
+        this.date = sdf.format(date);
     }
 
     public String getDuration() {
         return this.duration;
     }
 
-    public void setDuration(Date dateEnd) {
-        // if duration is null or if duration is before date then throw exception
-        try {
-            if (duration == null) {
-                throw new NullPointerException();
-            }
-            if (dateEnd.before(date)) {
-                throw new IllegalArgumentException();
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Error: Null value in Treatment constructor");
-            return;
-        }
-        this.dateEnd = dateEnd;
-    }
-
-    public void setDuration() {
+    public void setDuration(Date date, Date dateEnd) {
         // set duration to the difference between date and dateEnd as a String with day
         // and weeks
         long diff = dateEnd.getTime() - date.getTime();
@@ -167,9 +152,9 @@ public class Treatment {
 
     @Override
     public String toString() {
-        return "Treatment{" + "name=" + name + ", description=" + description + ", doctor=" + doctor.nameToString()
+        return "Treatment{" + "name=" + name + ", description=" + description + ", doctor=" + doctor.getName()
                 + ", patient="
-                + patient.nameToString() + ", date=" + date + ", duration=" + duration + ", drugs=" + drugs + '}';
+                + patient.getName() + ", date=" + date + ", duration=" + duration + ", drugs=" + drugs + '}';
     }
 
 }

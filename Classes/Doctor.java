@@ -9,13 +9,15 @@ import java.util.Date;
 public class Doctor extends Person {
 
     private String specialty;
+    private Schedule schedule;
 
     public Doctor() {
     }
 
-    public Doctor(String f, String l, String s, Date d, String p, String i, String sp) {
+    public Doctor(String f, String l, String s, Date d, String p, String i, String sp, Schedule sc) {
         super(f, l, s, d, p);
         this.specialty = sp;
+        this.schedule = sc;
     }
 
     public String getSpecialty() {
@@ -24,6 +26,14 @@ public class Doctor extends Person {
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     @Override
