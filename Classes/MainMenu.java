@@ -12,19 +12,21 @@ public class MainMenu {
         Appointment menu3 = new Appointment();
         Billing menu4 = new Billing();
 
+        System.out.println("===============================================");
         System.out.println("Welcome to the medical center management system");
         System.out.println("===============================================");
 
         int option = 0;
 
         while (option != 4) {
+            System.out.println("===============================================");
             System.out.println("Please choose an option:");
             System.out.println("===============================================");
             System.out.println("1. Display patients menu");
             System.out.println("2. Display doctors menu");
             System.out.println("3. Display medical records menu");
             System.out.println("4. Quit");
-
+            System.out.println("===============================================");
             option = sc.nextInt();
 
             switch (option) {
