@@ -29,12 +29,13 @@ public class Schedule {
         int day = appointment.getDay();
         int month = appointment.getMonth();
         int nday = 0;
-        for (int i = 0; i < month; i++) {
+        for (int i = 0; i < month - 1; i++) {
             nday += this.dayInMonth[i];
         }
         day += nday;
         int indexW = day / 7; // index of week
-
+        System.out.println(day);
+        System.out.println(indexW);
         this.schedule[indexW].addAppointment(appointment, nday);
     }
 

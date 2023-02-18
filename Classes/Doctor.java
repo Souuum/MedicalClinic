@@ -43,7 +43,8 @@ public class Doctor extends Person {
     @Override
     public String toString() {
         return "Doctor{" + "firstName=" + firstName + ", lastName=" + lastName + ", socialNumber=" + socialNumber
-                + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + ", specialty=" + specialty + '}';
+                + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + ", specialty=" + specialty
+                + ", schedule : " + this.getScheduleString() + '}';
     }
 
 }

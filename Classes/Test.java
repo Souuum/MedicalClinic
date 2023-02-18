@@ -34,16 +34,19 @@ public class Test {
         System.out.println(schedule);
 
         Date d1 = new Date();
-        Date d2 = new Date(2023 - 1900, 2, 24); // Date is deprecated and the constructor set the year to 1900 + the
-                                                // year you pass as parameter
+        Date d2 = new Date(2023 - 1900, 11, 24); // Date is deprecated and the constructor set the year to 1900 + the
+        System.out.println(d2);
+        // year you pass as parameter and month is month-1 because it starts at 0
 
-        Appointment a = new Appointment(d, p, d1, 15);
+        Appointment a = new Appointment(d, p, d1, 14);
         Appointment a2 = new Appointment(d, p, d2, 15);
 
         d.getSchedule().addAppointment(a);
         d.getSchedule().addAppointment(a);
         d.getSchedule().addAppointment(a2);
         System.out.println(d.getScheduleString());
+
+        System.out.println(d);
 
     }
 }
