@@ -13,6 +13,7 @@ public class Treatment {
     private Doctor doctor;
     private Patient patient;
     private Date date;
+    private Date duration;
 
     public Treatment() {
     }
@@ -105,11 +106,19 @@ public class Treatment {
         this.date = date;
     }
 
+    public Date getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Date duration) {
+        this.duration = duration;
+    }
+
     @Override
     public String toString() {
         return "Treatment{" + "name=" + name + ", description=" + description + ", doctor=" + doctor.nameToString()
                 + ", patient="
-                + patient.nameToString() + ", date=" + date + '}';
+                + patient.nameToString() + ", date=" + date + ", duration=" + duration + '}';
     }
 
 }
