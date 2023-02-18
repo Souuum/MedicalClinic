@@ -4,20 +4,19 @@ package Classes;
  *  @author Souuum
  */
 
-import java.util.Date;
 
 public abstract class Person {
 
     protected String firstName;
     protected String lastName;
     protected String socialNumber;
-    protected Date birthDate;
+    protected String birthDate;
     protected String phoneNumber;
 
     public Person() {
     }
 
-    public Person(String f, String l, String s, Date d, String p) {
+    public Person(String f, String l, String s, String d, String p) {
         setFirstName(f);
         setLastName(l);
         setSocialNumber(s);
@@ -76,11 +75,11 @@ public abstract class Person {
         this.socialNumber = socialNumber;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         // exception handling
         try {
             if (birthDate == null) {

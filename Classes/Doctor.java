@@ -6,17 +6,36 @@ package Classes;
 
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Doctor extends Person {
 
     private String specialty;
     private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
+    private Scanner sc = new Scanner(System.in);
+
+    public void menuDoctor() {
+        int option = 0;
+        System.out.println("Choisissez une option :");
+
+        while (option != 5) {
+            System.out.println("1. Générer une facture");
+            System.out.println("2. Consulter mes rendez-vous");
+            System.out.println("3. Consulter mes factures");
+            System.out.println("4. Consulter mon dossier médical");
+            System.out.println("5. Quitter");
+            option = sc.nextInt();
+            sc.nextLine();
+
+        }
+
+    }
 
     public Doctor() {
     }
 
-    public Doctor(String f, String l, String s, Date d, String p, String i, String sp) {
+    public Doctor(String f, String l, String s, String d, String p, String i, String sp) {
         super(f, l, s, d, p);
         setSpecialty(sp);
         appointments = new ArrayList<>();
