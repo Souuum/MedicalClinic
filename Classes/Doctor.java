@@ -112,6 +112,7 @@ public class Doctor extends Person {
         super(f, l, s, d, p);
         this.specialty = sp;
         this.schedule = sc;
+
     public Doctor(String f, String l, String s, String d, String p, String i, String sp) {
         super(f, l, s, d, p);
         setSpecialty(sp);
@@ -134,6 +135,7 @@ public class Doctor extends Person {
         }
         this.specialty = specialty;
     }
+
     public Schedule getSchedule() {
         return schedule;
     }
@@ -144,8 +146,8 @@ public class Doctor extends Person {
 
     public String getScheduleString() {
         return this.getName() + "'s schedule\n" + this.schedule.toString();
-        }
-        
+    }
+
     public void generateBilling(Doctor doctor, Patient patient, Date date, double amount) {
         // Vérifier si le patient a un rendez-vous avec ce médecin à cette date
         Appointment appointment = null;
@@ -169,8 +171,8 @@ public class Doctor extends Person {
 
     @Override
     public String toString() {
-        return "Doctor{" + "firstName=" + firstName + ", lastName=" + lastName + ", socialNumber=" + socialNumber
-                + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + ", specialty=" + specialty
+        return "Doctor{" + "firstName :" + firstName + ", lastName :" + lastName + ", socialNumber :" + socialNumber
+                + ", birthDate :" + birthDate + ", phoneNumber :" + phoneNumber + ", specialty :" + specialty
                 + ", schedule : " + this.getScheduleString() + '}';
     }
 

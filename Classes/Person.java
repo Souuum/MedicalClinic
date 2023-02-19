@@ -1,9 +1,8 @@
 package Classes;
 
 /**
- *  @author Souuum
+ * @author Souuum
  */
-
 
 public abstract class Person {
 
@@ -111,8 +110,8 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "Person{" + "firstName=" + firstName + ", lastName=" + lastName + ", socialNumber=" + socialNumber
-                + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + '}';
+        return "Person{" + "firstName :" + firstName + ", lastName :" + lastName + ", socialNumber :" + socialNumber
+                + ", birthDate :" + birthDate + ", phoneNumber :" + phoneNumber + '}';
     }
 
     public String getName() {

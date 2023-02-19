@@ -204,10 +204,10 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        return "Patient :\n" + "First Name = " + firstName + "\nLast Name = " + lastName + "\nSocial Number = "
-                + socialNumber
-                + "\nDate birth = " + birthDate + "\nPhone Number = " + phoneNumber + "\nInsurance Company = "
-                + insuranceCompany;
+        return "Patient{" + "firstName :" + firstName + ", lastName :" + lastName + ", socialNumber :" + socialNumber
+                + ", birthDate :" + birthDate + ", phoneNumber :" + phoneNumber + ", insuranceCompany :"
+                + insuranceCompany
+                + '}';
     }
 
 }
