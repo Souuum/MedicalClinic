@@ -1,4 +1,4 @@
-package MedicalClinic.Classes;
+package Classes;
 
 /**
  * @author Souuum
@@ -18,13 +18,12 @@ public class Treatment {
     public Treatment() {
     }
 
-    public Treatment(String n, String d, Doctor doc, Patient pat, Date da, Date du) {
-        this.name = n;
-        this.description = d;
-        this.doctor = doc;
-        this.patient = pat;
-        this.date = da;
-        this.duration = du;
+    public Treatment(String n, String d, Doctor doc, Patient pat, Date da) {
+        setName(n);
+        setDescription(d);
+        setDoctor(doc);
+        setPatient(pat);
+        setDate(da);
     }
 
     public String getName() {
@@ -32,6 +31,14 @@ public class Treatment {
     }
 
     public void setName(String name) {
+        try {
+            if (name == null || name.isEmpty()) {
+                throw new IllegalArgumentException("Name cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.name = name;
     }
 
@@ -40,6 +47,14 @@ public class Treatment {
     }
 
     public void setDescription(String description) {
+        try {
+            if (description == null || description.isEmpty()) {
+                throw new IllegalArgumentException("Description cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.description = description;
     }
 
@@ -48,6 +63,14 @@ public class Treatment {
     }
 
     public void setDoctor(Doctor doctor) {
+        try {
+            if (doctor == null) {
+                throw new IllegalArgumentException("Doctor cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.doctor = doctor;
     }
 
@@ -56,6 +79,14 @@ public class Treatment {
     }
 
     public void setPatient(Patient patient) {
+        try {
+            if (patient == null) {
+                throw new IllegalArgumentException("Patient cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.patient = patient;
     }
 
@@ -64,6 +95,14 @@ public class Treatment {
     }
 
     public void setDate(Date date) {
+        try {
+            if (date == null) {
+                throw new IllegalArgumentException("Date cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.date = date;
     }
 

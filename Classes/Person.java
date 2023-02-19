@@ -1,28 +1,27 @@
-package MedicalClinic.Classes;
+package Classes;
 
 /**
  *  @author Souuum
  */
 
-import java.util.Date;
 
 public abstract class Person {
 
     protected String firstName;
     protected String lastName;
     protected String socialNumber;
-    protected Date birthDate;
+    protected String birthDate;
     protected String phoneNumber;
 
     public Person() {
     }
 
-    public Person(String f, String l, String s, Date d, String p) {
-        this.firstName = f;
-        this.lastName = l;
-        this.socialNumber = s;
-        this.birthDate = d;
-        this.phoneNumber = p;
+    public Person(String f, String l, String s, String d, String p) {
+        setFirstName(f);
+        setLastName(l);
+        setSocialNumber(s);
+        setBirthDate(d);
+        setPhoneNumber(p);
     }
 
     public String getFirstName() {
@@ -30,6 +29,15 @@ public abstract class Person {
     }
 
     public void setFirstName(String firstName) {
+        // exception handling
+        try {
+            if (firstName == null || firstName.isEmpty()) {
+                throw new IllegalArgumentException("First name cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.firstName = firstName;
     }
 
@@ -38,6 +46,15 @@ public abstract class Person {
     }
 
     public void setLastName(String lastName) {
+        // exception handling
+        try {
+            if (lastName == null || lastName.isEmpty()) {
+                throw new IllegalArgumentException("Last name cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.lastName = lastName;
     }
 
@@ -46,14 +63,32 @@ public abstract class Person {
     }
 
     public void setSocialNumber(String socialNumber) {
+        // exception handling
+        try {
+            if (socialNumber == null || socialNumber.isEmpty()) {
+                throw new IllegalArgumentException("Social number cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.socialNumber = socialNumber;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
+        // exception handling
+        try {
+            if (birthDate == null) {
+                throw new IllegalArgumentException("Birth date cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.birthDate = birthDate;
     }
 
@@ -62,6 +97,15 @@ public abstract class Person {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        // exception handling
+        try {
+            if (phoneNumber == null || phoneNumber.isEmpty()) {
+                throw new IllegalArgumentException("Phone number cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         this.phoneNumber = phoneNumber;
     }
 
