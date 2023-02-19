@@ -5,6 +5,8 @@ package Classes;
  */
 
 import java.util.Date;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ public class Doctor extends Person {
     private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
     private Scanner sc = new Scanner(System.in);
+    DoctorManager d = new DoctorManager();
 
     public void menuDoctor() {
         int option = 0;
@@ -39,60 +42,65 @@ public class Doctor extends Person {
                 case 1:
                     System.out.println("List all doctors sort by first name");
                     System.out.println("====================================");
-                    sortDoctorsByFirstName();
-                    listAllDoctors();
+                    d.sortDoctorsByFirstName();
+                    d.listAllDoctors();
                     break;
                 case 2:
                     System.out.println("Search and display a doctor");
                     System.out.println("====================================");
-                    searchDoctor();
+                    d.searchDoctor();
                     break;
                 case 3:
                     System.out.println("Add a doctor");
                     System.out.println("====================================");
-                    addDoctor();
+                    d.addDoctor();
                     break;
                 case 4:
                     System.out.println("Add doctor by file");
                     System.out.println("====================================");
-                    addDoctorByFile();
+                    try {
+                        d.addDoctorByFile("Classes/Doctors.txt");
+                    } catch (FileNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     break;
                 case 5:
                     System.out.println("Download doctor file");
                     System.out.println("====================================");
-                    downloadDoctorFile();
+                    try {
+                        d.downloadDoctorFile("DownloadedDoctors.txt");
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     break;
                 case 6:
                     System.out.println("Update a doctor");
                     System.out.println("====================================");
-                    updateDoctor();
+                    d.updateDoctor();
                     break;
                 case 7:
                     System.out.println("Delete a doctor");
                     System.out.println("====================================");
-                    deleteDoctor();
+                    d.deleteDoctor();
                     break;
                 case 8:
                     System.out.println("Create a billing for a patient");
                     System.out.println("====================================");
-                    createBillingForPatient();
+                    d.createBillingForPatient();
                     break;
                 case 9:
                     System.out.println("List all billings");
                     System.out.println("====================================");
-                    listAllBillings();
+                    d.listAllBillings();
                     break;
                 case 10:
                     System.out.println("Search and display all billing for a patient");
                     System.out.println("====================================");
-                    searchAllBillingsForPatient();
+                    d.searchAllBillingsForPatient();
                     break;
                 case 11:
-                    System.out.println("Search and display all billing for a doctor");
-                    System.out.println("====================================");
-                    searchAllBillingsForDoctor();
-                    break;
-                case 12:
                     System.out.println("Return to main menu");
                     System.out.println("====================================");
                     break;
@@ -107,7 +115,7 @@ public class Doctor extends Person {
     public Doctor() {
     }
 
-    public Doctor(String f, String l, String s, String d, String p, String i, String sp) {
+    public Doctor(String f, String l, String s, String d, String p, String sp) {
         super(f, l, s, d, p);
         setSpecialty(sp);
         appointments = new ArrayList<>();
@@ -130,11 +138,11 @@ public class Doctor extends Person {
         this.specialty = specialty;
     }
 
-    public void generateBilling(Doctor doctor, Patient patient, Date date, double amount) {
+    public void generateBilling(Patient patient, Date date, double amount, String description) {
         // Vérifier si le patient a un rendez-vous avec ce médecin à cette date
         Appointment appointment = null;
         for (Appointment a : appointments) {
-            if (a.getDoctor().equals(doctor) && a.getPatient().equals(patient) && a.getDate().equals(date)) {
+            if (a.getDoctor().equals(this) && a.getPatient().equals(patient) && a.getDate().equals(date)) {
                 appointment = a;
                 break;
             }

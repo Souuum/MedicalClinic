@@ -13,7 +13,6 @@ public class Patient extends Person {
 
     private Scanner sc = new Scanner(System.in);
     private String insuranceCompany;
-    private ArrayList<String> medicalHistory;
     private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
     PatientManager pm = new PatientManager();
@@ -69,7 +68,7 @@ public class Patient extends Person {
                     System.out.println("Download patient file");
                     System.out.println("====================================");
                     try {
-                        pm.writeFile("DownloadPatient.txt");
+                        pm.downloadPatientFile("DownloadPatient.txt");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -175,17 +174,6 @@ public class Patient extends Person {
         billings.remove(billing);
     }
 
-    public ArrayList<String> getMedicalHistory() {
-        return medicalHistory;
-    }
-
-    public void addMedicalHistory(String history) {
-        medicalHistory.add(history);
-    }
-
-    public void removeMedicalHistory(String history) {
-        medicalHistory.remove(history);
-    }
 
     public String hasAppointmentWithDoctor(Doctor doctor) {
         for (Appointment appointment : appointments) {

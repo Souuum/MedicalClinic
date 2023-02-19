@@ -34,7 +34,7 @@ public class PatientManager {
         inFile.close();
     }
 
-    public void writeFile(String fileName) throws IOException {
+    public void downloadPatientFile(String fileName) throws IOException {
         PrintWriter outFile = new PrintWriter(new FileWriter(fileName));
         System.out.println("====================================");
         System.out.println("Saving file...");
@@ -115,7 +115,7 @@ public class PatientManager {
 
     public void deletePatient() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter social number: ");
+        System.out.println("Enter the social number of the patient you want to delete : ");
         String socialNumber = input.next();
         Iterator<Patient> iterator = patients.iterator();
         boolean patientFound = false;

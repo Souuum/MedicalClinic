@@ -10,7 +10,6 @@ public class MainMenu {
         Patient menu = new Patient();
         Doctor menu2 = new Doctor();
         Appointment menu3 = new Appointment();
-        Billing menu4 = new Billing();
 
         System.out.println("===============================================");
         System.out.println("Welcome to the medical center management system");
@@ -48,7 +47,6 @@ public class MainMenu {
                 case 4:
                     System.out.println("You choose to quit.");
                     System.out.println("===============================================");
-                    menu4.menuBilling();
                     break;
                 default:
                     System.out.println("Please choose a valid option");

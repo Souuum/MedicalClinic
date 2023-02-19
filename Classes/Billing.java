@@ -1,28 +1,13 @@
 package Classes;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Billing {
 
-    private Scanner sc = new Scanner(System.in);
+
     private Patient patient;
     private ArrayList<String> services;
     private ArrayList<Double> costs;
-
-    public void menuBilling() {
-        int option = 0;
-        System.out.println("Choisissez une option :");
-
-        while (option != 5) {
-            System.out.println("1. Prendre rendez-vous");
-            System.out.println("2. Consulter mes rendez-vous");
-            System.out.println("3. Consulter mes factures");
-
-            option = sc.nextInt();
-            sc.nextLine();
-        }
-    }
 
     public Billing() {
     }
@@ -86,15 +71,6 @@ public class Billing {
             System.out.println(services.get(i) + " - $" + costs.get(i));
         }
         System.out.println("Total: $" + getTotalCost());
-    }
-
-    public void printMedicalHistory() {
-        System.out.println("Patient: " + patient.getFirstName() + " " + patient.getLastName());
-        System.out.println("Insurance Company: " + patient.getInsuranceCompany());
-        System.out.println("Medical History: ");
-        for (String medicalHistory : patient.getMedicalHistory()) {
-            System.out.println(medicalHistory);
-        }
     }
 
     public void printAppointmentHistory() {
