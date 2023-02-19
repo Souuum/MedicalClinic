@@ -1,163 +1,114 @@
 package Classes;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Appointment {
-    private Treatment treatment;
-    private Date date;
-    private String time;
-    private String location;
-    private String notes;
+    // Class which represents an appointment between a doctor and a patient
+
     private Doctor doctor;
     private Patient patient;
-    private Scanner sc = new Scanner(System.in);
+    private String date;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private int month;
+    private int day;
+    private int hour;
 
-    public void menuAppointment() {
-        int option = 0;
-        System.out.println("Choisissez une option :");
 
-        while (option != 5) {
-            System.out.println("1. Créer un rendez-vous");
-            System.out.println("2. Modifier un rendez-vous");
-            System.out.println("3. Supprimer un rendez-vous");
-            System.out.println("4. Consulter un rendez-vous");
-            System.out.println("5. Quitter");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
-    }
-
-    public Appointment() {
-    }
-
-    public Appointment(Treatment t, Date d, String ti, String l, String n, Doctor doc, Patient pat) {
-        setTreatment(t);
-        setDate(d);
-        setTime(ti);
-        setLocation(l);
-        setNotes(n);
-        setDoctor(doc);
-        setPatient(pat);
-    }
-
-    public Treatment getTreatment() {
-        return treatment;
-    }
-
-    public void setTreatment(Treatment treatment) {
-        try {
-            if (treatment == null) {
-                throw new IllegalArgumentException("Treatment cannot be empty");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        this.treatment = treatment;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        try {
-            if (date == null) {
-                throw new IllegalArgumentException("Date cannot be empty");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        try {
-            if (time == null || time.isEmpty()) {
-                throw new IllegalArgumentException("Time cannot be empty");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        this.time = time;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        try {
-            if (location == null || location.isEmpty()) {
-                throw new IllegalArgumentException("Location cannot be empty");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        this.location = location;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        try {
-            if (notes == null || notes.isEmpty()) {
-                throw new IllegalArgumentException("Notes cannot be empty");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        this.notes = notes;
+    public Appointment(Doctor doctor, Patient patient, Date date, int hour) {
+        setDoctor(doctor);
+        setPatient(patient);
+        setDate(date);
+        setHour(hour);
     }
 
     public Doctor getDoctor() {
-        return doctor;
+        return this.doctor;
     }
 
     public void setDoctor(Doctor doctor) {
         try {
             if (doctor == null) {
-                throw new IllegalArgumentException("Doctor cannot be empty");
+                throw new NullPointerException();
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Error: Null value in Appointment constructor");
             return;
         }
         this.doctor = doctor;
     }
 
     public Patient getPatient() {
-        return patient;
+        return this.patient;
     }
 
     public void setPatient(Patient patient) {
         try {
             if (patient == null) {
-                throw new IllegalArgumentException("Patient cannot be empty");
+                throw new NullPointerException();
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Error: Null value in Appointment constructor");
             return;
         }
         this.patient = patient;
     }
 
-    @Override
+    public String getDate() {
+        return this.date;
+    }
 
+    public void setDate(Date date) {
+        try {
+            if (date == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error: Null value in Appointment constructor");
+            return;
+        }
+        this.date = sdf.format(date);
+        setMonth(this.date);
+        setDay(this.date);
+    }
+
+    public int getMonth() {
+        return this.month;
+    }
+
+    public void setMonth(String date) {
+        this.month = Integer.parseInt(date.substring(3, 5));
+    }
+
+    public int getDay() {
+        return this.day;
+    }
+
+    public void setDay(String date) {
+        this.day = Integer.parseInt(date.substring(0, 2));
+    }
+
+    public int getHour() {
+        return this.hour;
+    }
+
+    public void setHour(int hour) {
+        try {
+            if (hour < 0 || hour > 23) {
+                throw new IllegalArgumentException();
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: Invalid hour in Appointment constructor");
+            return;
+        }
+        this.hour = hour;
+    }
+
+    @Override
     public String toString() {
-        return "Appointment{" + "treatment=" + treatment + ", date=" + date + ", time=" + time + ", location="
-                + location + ", notes=" + notes + ", doctor=" + doctor + '}';
+        return "[" + this.date + ", at " + +this.hour + "h, doctor=" + doctor.getName() + ", patient="
+                + patient.getName() + "]";
     }
 
 }
+

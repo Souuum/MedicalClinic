@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Doctor extends Person {
 
     private String specialty;
+    private Schedule schedule;
     private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
     private Scanner sc = new Scanner(System.in);
@@ -107,6 +108,10 @@ public class Doctor extends Person {
     public Doctor() {
     }
 
+    public Doctor(String f, String l, String s, Date d, String p, String i, String sp, Schedule sc) {
+        super(f, l, s, d, p);
+        this.specialty = sp;
+        this.schedule = sc;
     public Doctor(String f, String l, String s, String d, String p, String i, String sp) {
         super(f, l, s, d, p);
         setSpecialty(sp);
@@ -129,7 +134,18 @@ public class Doctor extends Person {
         }
         this.specialty = specialty;
     }
+    public Schedule getSchedule() {
+        return schedule;
+    }
 
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public String getScheduleString() {
+        return this.getName() + "'s schedule\n" + this.schedule.toString();
+        }
+        
     public void generateBilling(Doctor doctor, Patient patient, Date date, double amount) {
         // Vérifier si le patient a un rendez-vous avec ce médecin à cette date
         Appointment appointment = null;
@@ -148,12 +164,14 @@ public class Doctor extends Person {
         Billing billing = new Billing(patient, appointment, amount);
         billings.add(billing);
         System.out.println("Facture générée pour " + patient.getFirstName() + " pour un montant de " + amount + "€");
+
     }
 
     @Override
     public String toString() {
         return "Doctor{" + "firstName=" + firstName + ", lastName=" + lastName + ", socialNumber=" + socialNumber
-                + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + ", specialty=" + specialty + '}';
+                + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + ", specialty=" + specialty
+                + ", schedule : " + this.getScheduleString() + '}';
     }
 
 }
