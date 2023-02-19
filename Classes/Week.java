@@ -28,6 +28,21 @@ public class Week {
         }
     }
 
+    public Appointment[] getAllAppointments() {
+
+        Appointment[] appointments = new Appointment[168]; // 7*24
+        int index = 0;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 24; j++) {
+                if (this.week[i][j] != null) {
+                    appointments[index] = this.week[i][j];
+                    index++;
+                }
+            }
+        }
+        return appointments;
+    }
+
     public boolean isAvailable(Appointment appointment, int indexD) {
         // Method which checks if the doctor is available at the time of the appointment
         int hour = appointment.getHour();

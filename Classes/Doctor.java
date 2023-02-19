@@ -12,7 +12,6 @@ public class Doctor extends Person {
 
     private String specialty;
     private Schedule schedule;
-    private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
     private Scanner sc = new Scanner(System.in);
 
@@ -40,11 +39,12 @@ public class Doctor extends Person {
         super(f, l, s, d, p);
         this.specialty = sp;
         this.schedule = sc;
+
     public Doctor(String f, String l, String s, String d, String p, String i, String sp) {
         super(f, l, s, d, p);
         setSpecialty(sp);
-        appointments = new ArrayList<>();
         billings = new ArrayList<>();
+        this.schedule = new Schedule();
     }
 
     public String getSpecialty() {
@@ -62,6 +62,7 @@ public class Doctor extends Person {
         }
         this.specialty = specialty;
     }
+
     public Schedule getSchedule() {
         return schedule;
     }
@@ -72,13 +73,13 @@ public class Doctor extends Person {
 
     public String getScheduleString() {
         return this.getName() + "'s schedule\n" + this.schedule.toString();
-        }
-        
-    public void generateBilling(Doctor doctor, Patient patient, Date date, double amount) {
+    }
+
+    public void generateBilling(Patient patient, Date date, double amount) {
         // Vérifier si le patient a un rendez-vous avec ce médecin à cette date
         Appointment appointment = null;
-        for (Appointment a : appointments) {
-            if (a.getDoctor().equals(doctor) && a.getPatient().equals(patient) && a.getDate().equals(date)) {
+        for (Appointment a : this.schedule.getAllAppointments()) {
+            if (a.getDoctor().equals(this) && a.getPatient().equals(patient) && a.getDate().equals(date)) {
                 appointment = a;
                 break;
             }

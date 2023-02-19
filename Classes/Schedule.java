@@ -39,6 +39,20 @@ public class Schedule {
         this.schedule[indexW].addAppointment(appointment, nday);
     }
 
+    public Appointment[] getAllAppointments() {
+        Appointment[] appointments = new Appointment[8736]; // 7*24*52
+        int index = 0;
+        for (Week week : this.schedule) {
+            for (Appointment appointment : week.getAllAppointments()) {
+                if (appointment != null) {
+                    appointments[index] = appointment;
+                    index++;
+                }
+            }
+        }
+        return appointments;
+    }
+
     @Override
     public String toString() {
         String s = "";
