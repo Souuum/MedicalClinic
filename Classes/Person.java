@@ -4,8 +4,12 @@ package Classes;
  * @author Souuum
  */
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public abstract class Person {
 
+    protected java.text.SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     protected String firstName;
     protected String lastName;
     protected String socialNumber;
@@ -15,7 +19,7 @@ public abstract class Person {
     public Person() {
     }
 
-    public Person(String f, String l, String s, String d, String p) {
+    public Person(String f, String l, String s, Date d, String p) {
         setFirstName(f);
         setLastName(l);
         setSocialNumber(s);

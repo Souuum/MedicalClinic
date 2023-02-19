@@ -2,6 +2,8 @@ package Classes;
 
 import java.util.*;
 import java.io.*;
+import java.util.Scanner;
+import java.io.IOException;
 
 public class PatientManager {
     private String firstName;
@@ -10,8 +12,9 @@ public class PatientManager {
     private String birthDate;
     private String phoneNumber;
     private String insuranceCompany;
+    private static Scanner sc = new Scanner(System.in);
 
-    List<Patient> patients = new ArrayList<>();
+    private List<Patient> patients = new ArrayList<>();
 
     public void addPatientByFile(String fileName) throws FileNotFoundException {
         Scanner inFile = new Scanner(new File(fileName));
@@ -26,6 +29,10 @@ public class PatientManager {
             patients.add(p);
         }
         inFile.close();
+    }
+
+    public void addPatient(Patient p) {
+        this.patients.add(p);
     }
 
     public void writeFile(String fileName) throws IOException {
@@ -63,7 +70,11 @@ public class PatientManager {
 
         if (!patientFound) {
             System.out.println("Patient not found");
+            input.close();
+
+            return;
         }
+        input.close();
     }
 
     public void addPatient() {
@@ -173,6 +184,103 @@ public class PatientManager {
                 return p1.getInsuranceCompany().compareTo(p2.getInsuranceCompany());
             }
         });
+    }
+
+    public void menuPatient() {
+        int option = 0;
+        System.out.println("Choose an option :");
+
+        while (option != 13) {
+            System.out.println("1. List all patients");
+            System.out.println("2. Search and display a patient");
+            System.out.println("3. Add a patient");
+            System.out.println("4. Add patient by file");
+            System.out.println("5. Download patient file");
+            System.out.println("6. Update a patient");
+            System.out.println("7. Delete a patient");
+            System.out.println("8. List all appointments");
+            System.out.println("9. Search and display an appointment");
+            System.out.println("10. Add an appointment");
+            System.out.println("11. Update an appointment");
+            System.out.println("12. Delete an appointment");
+            System.out.println("13. Return to main menu");
+            option = sc.nextInt();
+            sc.nextLine();
+
+            switch (option) {
+                case 1:
+                    System.out.println("List all patients");
+                    System.out.println("====================================");
+                    this.listAllPatients();
+                    break;
+                case 2:
+                    System.out.println("Search and display a patient");
+                    System.out.println("====================================");
+                    this.searchPatient();
+                    break;
+                case 3:
+                    System.out.println("Add a patient");
+                    System.out.println("====================================");
+                    this.addPatient();
+                    break;
+                case 4:
+                    System.out.println("Add patient by file");
+                    System.out.println("====================================");
+                    try {
+                        this.addPatientByFile("Classes/InfoPatient.txt");
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 5:
+                    System.out.println("Download patient file");
+                    System.out.println("====================================");
+                    try {
+                        this.writeFile("DownloadPatient.txt");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 6:
+                    System.out.println("Update a patient");
+                    System.out.println("====================================");
+                    break;
+                case 7:
+                    System.out.println("Delete a patient");
+                    System.out.println("====================================");
+                    this.deletePatient();
+                    break;
+                case 8:
+                    System.out.println("List all appointments");
+                    System.out.println("====================================");
+                    break;
+                case 9:
+                    System.out.println("Search and display an appointment");
+                    System.out.println("====================================");
+                    break;
+                case 10:
+                    System.out.println("Add an appointment");
+                    System.out.println("====================================");
+                    break;
+                case 11:
+                    System.out.println("Update an appointment");
+                    System.out.println("====================================");
+                    break;
+                case 12:
+                    System.out.println("Delete an appointment");
+                    System.out.println("====================================");
+                    break;
+                case 13:
+                    System.out.println("Return to main menu");
+                    System.out.println("====================================");
+                    break;
+                default:
+                    System.out.println("Invalid option");
+                    System.out.println("====================================");
+            }
+
+        }
+
     }
 
 }
