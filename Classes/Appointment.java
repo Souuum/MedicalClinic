@@ -13,21 +13,6 @@ public class Appointment {
     private Patient patient;
     private Scanner sc = new Scanner(System.in);
 
-    public void menuAppointment() {
-        int option = 0;
-        System.out.println("Choisissez une option :");
-
-        while (option != 5) {
-            System.out.println("1. Créer un rendez-vous");
-            System.out.println("2. Modifier un rendez-vous");
-            System.out.println("3. Supprimer un rendez-vous");
-            System.out.println("4. Consulter un rendez-vous");
-            System.out.println("5. Quitter");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
-    }
-
     public Appointment() {
     }
 

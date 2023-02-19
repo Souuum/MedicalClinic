@@ -11,6 +11,7 @@ public class PatientManager {
     private String phoneNumber;
     private String insuranceCompany;
 
+    List<Appointment> appointments = new ArrayList<>();
     List<Patient> patients = new ArrayList<>();
 
     public void addPatientByFile(String fileName) throws FileNotFoundException {
@@ -204,6 +205,54 @@ public class PatientManager {
         }
     }
 
+    public void listAllAppointments() {
+        for (Appointment a : appointments) {
+            System.out.println(a.toString());
+        }
+    }
+
+    public void searchAppointment() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter social number: ");
+        String socialNumber = input.next();
+
+        boolean appointmentFound = false;
+        for (Appointment a : appointments) {
+            if (a.getPatient().getSocialNumber().equals(socialNumber)) {
+                System.out.println(a.toString());
+                appointmentFound = true;
+            }
+        }
+        if (!appointmentFound) {
+            System.out.println("No appointments found");
+        }
+    }
+
+    public void addAppointment() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter social number: ");
+        String socialNumber = input.next();
+        boolean patientFound = false;
+        for (Patient p : patients) {
+            if (p.getSocialNumber().equals(socialNumber)) {
+                patientFound = true;
+                System.out.println("Enter date: ");
+                String date = input.next();
+                System.out.println("Enter time: ");
+                String time = input.next();
+                System.out.println("Enter doctor: ");
+                String doctor = input.next();
+                System.out.println("Enter reason: ");
+                String reason = input.next();
+                System.out.println("Enter ");
+                Appointment a = new Appointment(date, time, doctor, reason, p);
+                appointments.add(a);
+            }
+        }
+        if (!patientFound) {
+            System.out.println("Patient not found");
+        }
+    }
     // sort patients by first name
 
     public void sortPatientsByFirstName() {
