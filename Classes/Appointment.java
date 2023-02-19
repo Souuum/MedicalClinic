@@ -14,8 +14,6 @@ public class Appointment {
     private int day;
     private int hour;
 
-    public Appointment() {
-    }
 
     public Appointment(Doctor doctor, Patient patient, Date date, int hour) {
         setDoctor(doctor);
@@ -113,3 +111,4 @@ public class Appointment {
     }
 
 }
+
