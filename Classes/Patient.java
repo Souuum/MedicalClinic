@@ -23,7 +23,7 @@ public class Patient extends Person {
         System.out.println("Choose an option :");
 
         while (option != 13) {
-            System.out.println("1. List all patients");
+            System.out.println("1. List all patients sort by first name");
             System.out.println("2. Search and display a patient");
             System.out.println("3. Add a patient");
             System.out.println("4. Add patient by file");
@@ -41,8 +41,9 @@ public class Patient extends Person {
 
             switch (option) {
                 case 1:
-                    System.out.println("List all patients");
+                    System.out.println("List all patients sort by first name");
                     System.out.println("====================================");
+                    pm.sortPatientsByFirstName();
                     pm.listAllPatients();
                     break;
                 case 2:
@@ -76,6 +77,7 @@ public class Patient extends Person {
                 case 6:
                     System.out.println("Update a patient");
                     System.out.println("====================================");
+                    pm.updatePatient();
                     break;
                 case 7:
                     System.out.println("Delete a patient");
@@ -83,24 +85,29 @@ public class Patient extends Person {
                     pm.deletePatient();
                     break;
                 case 8:
-                    System.out.println("List all appointments");
+                    System.out.println("List all appointments for a patient");
                     System.out.println("====================================");
+                    pm.listAllAppointments();
                     break;
                 case 9:
-                    System.out.println("Search and display an appointment");
+                    System.out.println("Search and display an appointment ");
                     System.out.println("====================================");
+                    pm.searchAppointment();
                     break;
                 case 10:
-                    System.out.println("Add an appointment");
+                    System.out.println("Add an appointment for a patient");
                     System.out.println("====================================");
+                    pm.addAppointment();
                     break;
                 case 11:
-                    System.out.println("Update an appointment");
+                    System.out.println("Update an appointment for a patient");
                     System.out.println("====================================");
+                    pm.updateAppointment();
                     break;
                 case 12:
-                    System.out.println("Delete an appointment");
+                    System.out.println("Delete an appointment for a patient");
                     System.out.println("====================================");
+                    pm.deleteAppointment();
                     break;
                 case 13:
                     System.out.println("Return to main menu");
