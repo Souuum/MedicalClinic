@@ -106,6 +106,11 @@ public class Appointment {
         this.hour = hour;
     }
 
+    public String toJSON() {
+        return "{\"doctor\": \"" + this.doctor.getName() + "\", \"patient\": \"" + this.patient.getName()
+                + "\", \"date\": \"" + this.date + "\", \"hour\": " + this.hour + "}";
+    }
+
     @Override
     public String toString() {
         return "[" + this.date + ", at " + +this.hour + "h, doctor=" + doctor.getName() + ", patient="

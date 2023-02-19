@@ -1,5 +1,6 @@
 package Classes;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class Test {
@@ -26,8 +27,8 @@ public class Test {
 
         Schedule schedule = new Schedule();
 
-        Patient p = new Patient("Jhon", "Philips", "123456789", new Date(), "123456789",
-                "Aetna");
+        Patient p = new Patient("John", "Doe", "123456789", new Date(), "123456789", "Aetna");
+        Patient p1 = new Patient("Hugo", "Soum", "89732193", new Date(), "87889799", "Aetna");
 
         Doctor d = new Doctor("Jane", "Doe", "987654321", new Date(), "987654321",
                 "Aetna", "Cardiology", schedule);
@@ -48,6 +49,18 @@ public class Test {
         System.out.println(d.getScheduleString());
 
         System.out.println(d);
+
+        PatientManager pm = new PatientManager();
+
+        pm.addPatient(p);
+        pm.addPatient(p1);
+
+        try {
+            pm.writeFile("Data/patients.json");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         // Date db1 = new Date();
         // Doctor d1 = new Doctor("John", "Doe", "123456789", db1, "1234567890", "yo",

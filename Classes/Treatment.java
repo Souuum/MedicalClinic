@@ -1,6 +1,5 @@
 package Classes;
 
-
 import java.util.Date;
 import java.util.HashSet;
 import java.text.SimpleDateFormat;
@@ -13,7 +12,6 @@ public class Treatment {
     private Patient patient;
     private java.text.SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private String date;
-    private String dateEnd;
     private String duration = "";
     private HashSet<Drugs> drugs = new HashSet<Drugs>();
 
@@ -126,13 +124,6 @@ public class Treatment {
         } else {
             duration = diffDays + " days";
         }
-                throw new IllegalArgumentException("Date cannot be empty");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        this.date = date;
     }
 
     public HashSet<Drugs> getDrugsList() {
@@ -160,9 +151,9 @@ public class Treatment {
 
     @Override
     public String toString() {
-        return "Treatment{" + "name=" + name + ", description=" + description + ", doctor=" + doctor.getName()
-                + ", patient="
-                + patient.getName() + ", date=" + date + ", duration=" + duration + ", drugs=" + drugs + '}';
+        return "Treatment{" + "name :" + name + ", description :" + description + ", doctor :" + doctor.getName()
+                + ", patient :"
+                + patient.getName() + ", date :" + date + ", duration :" + duration + ", drugs :" + drugs + '}';
     }
 
 }

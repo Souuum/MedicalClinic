@@ -1,9 +1,6 @@
 package Classes;
 
-/**
- * @author Souuum
- */
-
+import java.util.Date;
 import java.util.ArrayList;
 
 public class Patient extends Person {
@@ -17,8 +14,8 @@ public class Patient extends Person {
     public Patient() {
     }
 
-    public Patient(String f, String l, String s, Date d, String p, String i) {
-        super(f, l, s, d, p);
+    public Patient(String f, String l, String s, Date date, String p, String i) {
+        super(f, l, s, date, p);
         setInsuranceCompany(i);
         appointments = new ArrayList<>();
         billings = new ArrayList<>();
@@ -99,6 +96,17 @@ public class Patient extends Person {
             }
         }
         return "";
+    }
+
+    public String toJSON() {
+        return "{\n" +
+                "  \"firstName\" : \"" + firstName + "\",\n" +
+                "  \"lastName\" : \"" + lastName + "\",\n" +
+                "  \"socialNumber\" : \"" + socialNumber + "\",\n" +
+                "  \"birthDate\" : \"" + birthDate + "\",\n" +
+                "  \"phoneNumber\" : \"" + phoneNumber + "\",\n" +
+                "  \"insuranceCompany\" : \"" + insuranceCompany + "\"\n" +
+                "}";
     }
 
     @Override

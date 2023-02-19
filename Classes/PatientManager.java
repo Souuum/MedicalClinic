@@ -23,9 +23,13 @@ public class PatientManager {
             lastName = inFile.next();
             socialNumber = inFile.next();
             birthDate = inFile.next();
+            int year = Integer.parseInt(birthDate.substring(0, 4));
+            int month = Integer.parseInt(birthDate.substring(4, 6));
+            int day = Integer.parseInt(birthDate.substring(6, 8));
+            Date bd = new Date(year - 1900, month - 1, day);
             phoneNumber = inFile.next();
             insuranceCompany = inFile.next();
-            Patient p = new Patient(firstName, lastName, socialNumber, birthDate, phoneNumber, insuranceCompany);
+            Patient p = new Patient(firstName, lastName, socialNumber, bd, phoneNumber, insuranceCompany);
             patients.add(p);
         }
         inFile.close();
@@ -36,10 +40,15 @@ public class PatientManager {
     }
 
     public void writeFile(String fileName) throws IOException {
+        File fout = new File(fileName); // create the file
         PrintWriter outFile = new PrintWriter(new FileWriter(fileName));
+        outFile.println("[");
+        String data = "";
         for (Patient p : patients) {
-            outFile.println(p.toString());
+            data += p.toJSON() + ",";
         }
+        data = data.substring(0, data.length() - 1); // delete the last comma
+        outFile.println(data + "\n]");
         outFile.close();
     }
 
@@ -87,11 +96,15 @@ public class PatientManager {
         socialNumber = input.next();
         System.out.println("Enter birth date: ");
         birthDate = input.next();
+        int year = Integer.parseInt(birthDate.substring(0, 4));
+        int month = Integer.parseInt(birthDate.substring(4, 6));
+        int day = Integer.parseInt(birthDate.substring(6, 8));
+        Date bd = new Date(year - 1900, month - 1, day);
         System.out.println("Enter phone number: ");
         phoneNumber = input.next();
         System.out.println("Enter insurance company: ");
         insuranceCompany = input.next();
-        Patient p = new Patient(firstName, lastName, socialNumber, birthDate, phoneNumber, insuranceCompany);
+        Patient p = new Patient(firstName, lastName, socialNumber, bd, phoneNumber, insuranceCompany);
         patients.add(p);
         input.close();
     }

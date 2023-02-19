@@ -44,6 +44,18 @@ public class Week {
         }
     }
 
+    public String toJSON(){
+        String s = "";
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 24; j++) {
+                if (this.week[i][j] != null) {
+                    s += this.week[i][j].toJSON() + ",\n";
+                }
+            }
+        }
+        return s;
+    }
+
     @Override
     public String toString() {
         String s = "";

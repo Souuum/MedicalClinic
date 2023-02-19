@@ -39,6 +39,16 @@ public class Schedule {
         this.schedule[indexW].addAppointment(appointment, nday);
     }
 
+    public String toJSON() {
+        String s = "";
+        for (int i = 0; i < 52; i++) {
+            if (this.schedule[i].toString() != "") {
+                s += this.schedule[i].toJSON();
+            }
+        }
+        return s == "" ? "No appointments" : s;
+    }
+
     @Override
     public String toString() {
         String s = "";

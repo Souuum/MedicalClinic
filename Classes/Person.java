@@ -1,14 +1,13 @@
 package Classes;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 /**
  * @author Souuum
  */
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public abstract class Person {
-
     protected java.text.SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     protected String firstName;
     protected String lastName;
@@ -19,11 +18,11 @@ public abstract class Person {
     public Person() {
     }
 
-    public Person(String f, String l, String s, Date d, String p) {
+    public Person(String f, String l, String s, Date date, String p) {
         setFirstName(f);
         setLastName(l);
         setSocialNumber(s);
-        setBirthDate(d);
+        setBirthDate(date);
         setPhoneNumber(p);
     }
 
@@ -82,17 +81,28 @@ public abstract class Person {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
-        // exception handling
+    public void setBirthDate(Date date) {
         try {
-            if (birthDate == null) {
+            if (date == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error: Null value in Appointment constructor");
+            return;
+        }
+        this.birthDate = sdf.format(date);
+    }
+
+    public void setBirthDate(String date) {
+        try {
+            if (date == null || date.isEmpty()) {
                 throw new IllegalArgumentException("Birth date cannot be empty");
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return;
         }
-        this.birthDate = birthDate;
+        this.birthDate = date;
     }
 
     public String getPhoneNumber() {
@@ -114,8 +124,8 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "Person{" + "firstName :" + firstName + ", lastName :" + lastName + ", socialNumber :" + socialNumber
-                + ", birthDate :" + birthDate + ", phoneNumber :" + phoneNumber + '}';
+        return "Person{" + "firstName=" + firstName + ", lastName=" + lastName + ", socialNumber=" + socialNumber
+                + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + '}';
     }
 
     public String getName() {
