@@ -111,7 +111,7 @@ public class Appointment {
                 "  \"doctor\" : \"" + doctor.getName() + "\",\n" +
                 "  \"patient\" : \"" + patient.getName() + "\",\n" +
                 "  \"date\" : \"" + date + "\",\n" +
-                "  \"hour\" : \"" + hour + "\"\n" +
+                "  \"hour\" : " + hour + "\n" +
                 "}";
     }
 

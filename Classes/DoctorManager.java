@@ -41,7 +41,11 @@ public class DoctorManager {
             }
             inFile.close();
             data = data.substring(1, data.length() - 1);
-            String[] doctorsData = data.split("},");
+            String[] doctorsData = data.split("},f");
+
+            for (String s : doctorsData) {
+                System.out.println(s);
+            }
 
             for (String doctorData : doctorsData) {
                 doctorData = doctorData.trim();
@@ -49,7 +53,7 @@ public class DoctorManager {
                 if (doctorData.charAt(doctorData.length() - 1) != '}') {
                     doctorData += "}";
                 }
-                String firstName = doctorData.substring(doctorData.indexOf("firstName") + 12,
+                String firstName = doctorData.substring(doctorData.indexOf("firstName") + 14,
                         doctorData.indexOf("lastName") - 5);
                 String lastName = doctorData.substring(doctorData.indexOf("lastName") + 13,
                         doctorData.indexOf("socialNumber") - 5);
@@ -61,8 +65,6 @@ public class DoctorManager {
                         doctorData.indexOf("specialty") - 5);
                 String specialty = doctorData.substring(doctorData.indexOf("specialty") + 14,
                         doctorData.indexOf("schedule") - 5);
-
-                System.out.println(firstName + lastName + socialNumber + birthDate + phoneNumber + specialty);
 
                 Doctor d = new Doctor(firstName, lastName, socialNumber, birthDate, phoneNumber, specialty);
                 doctors.add(d);
