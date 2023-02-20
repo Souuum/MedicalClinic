@@ -26,6 +26,14 @@ public abstract class Person {
         setPhoneNumber(p);
     }
 
+    public Person(String f, String l, String s, String date, String p) {
+        setFirstName(f);
+        setLastName(l);
+        setSocialNumber(s);
+        setBirthDate(date);
+        setPhoneNumber(p);
+    }
+
     public String getFirstName() {
         return firstName;
     }

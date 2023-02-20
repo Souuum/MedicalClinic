@@ -22,6 +22,14 @@ public class Patient extends Person {
         medicalHistory = new ArrayList<>();
     }
 
+    public Patient(String f, String l, String s, String d, String p, String i) {
+        super(f, l, s, d, p);
+        setInsuranceCompany(i);
+        appointments = new ArrayList<>();
+        billings = new ArrayList<>();
+        medicalHistory = new ArrayList<>();
+    }
+
     public String getInsuranceCompany() {
         return insuranceCompany;
     }

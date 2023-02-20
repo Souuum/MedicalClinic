@@ -1,10 +1,11 @@
 package Classes;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         // Patient p = new Patient("John", "Doe", "123456789", new Date(), "123456789",
         // "Aetna");
@@ -55,12 +56,13 @@ public class Test {
         pm.addPatient(p);
         pm.addPatient(p1);
 
-        try {
-            pm.writeFile("Data/patients.json");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        pm.writeFile("Data/patients.json");
+
+        pm.addPatientByJSON("Data/patients.json");
+
+        pm.writeFile("Data/patients2.json");
+
+        pm.listAllPatients();
 
         // Date db1 = new Date();
         // Doctor d1 = new Doctor("John", "Doe", "123456789", db1, "1234567890", "yo",

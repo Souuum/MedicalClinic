@@ -17,6 +17,7 @@ public class PatientManager {
     private List<Patient> patients = new ArrayList<>();
 
     public void addPatientByFile(String fileName) throws FileNotFoundException {
+
         Scanner inFile = new Scanner(new File(fileName));
         while (inFile.hasNext()) {
             firstName = inFile.next();
@@ -29,10 +30,48 @@ public class PatientManager {
             Date bd = new Date(year - 1900, month - 1, day);
             phoneNumber = inFile.next();
             insuranceCompany = inFile.next();
-            Patient p = new Patient(firstName, lastName, socialNumber, bd, phoneNumber, insuranceCompany);
+            Patient p = new Patient(firstName, lastName, socialNumber, bd, phoneNumber,
+                    insuranceCompany);
             patients.add(p);
         }
         inFile.close();
+    }
+
+    public void addPatientByJSON(String fileName) {
+        try {
+            Scanner inFile = new Scanner(new File(fileName));
+            String data = "";
+            while (inFile.hasNext()) {
+                data += inFile.nextLine();
+            }
+            inFile.close();
+            data = data.substring(1, data.length() - 1);
+            String[] patientsData = data.split("},");
+
+            for (String patientData : patientsData) {
+                patientData = patientData.trim();
+                if (patientData.charAt(patientData.length() - 1) != '}') {
+                    patientData += "}";
+                }
+                String firstName = patientData.substring(patientData.indexOf("firstName") + 14,
+                        patientData.indexOf("lastName") - 5);
+                String lastName = patientData.substring(patientData.indexOf("lastName") + 13,
+                        patientData.indexOf("socialNumber") - 5);
+                String socialNumber = patientData.substring(patientData.indexOf("socialNumber") + 17,
+                        patientData.indexOf("birthDate") - 5);
+                String birthDate = patientData.substring(patientData.indexOf("birthDate") + 14,
+                        patientData.indexOf("phoneNumber") - 5);
+                String phoneNumber = patientData.substring(patientData.indexOf("phoneNumber") + 16,
+                        patientData.indexOf("insuranceCompany") - 5);
+                String insuranceCompany = patientData.substring(patientData.indexOf("insuranceCompany") + 21,
+                        patientData.indexOf("}") - 1);
+                Patient p = new Patient(firstName, lastName, socialNumber, birthDate, phoneNumber,
+                        insuranceCompany);
+                patients.add(p);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
     }
 
     public void addPatient(Patient p) {
