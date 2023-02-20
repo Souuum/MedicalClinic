@@ -64,6 +64,8 @@ public class Test {
 
         pm.listAllPatients();
 
+        pm.menuPatient();
+
         // Date db1 = new Date();
         // Doctor d1 = new Doctor("John", "Doe", "123456789", db1, "1234567890", "yo",
         // "yo");
