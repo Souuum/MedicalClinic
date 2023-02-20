@@ -26,15 +26,11 @@ public class Test {
 
         // System.out.println(day);
 
-        Schedule schedule = new Schedule();
-
         Patient p = new Patient("John", "Doe", "123456789", new Date(), "123456789", "Aetna");
         Patient p1 = new Patient("Hugo", "Soum", "89732193", new Date(), "87889799", "Aetna");
 
-        Doctor d = new Doctor("Jane", "Doe", "987654321", new Date(), "987654321",
-                "Aetna", "Cardiology", schedule);
-
-        System.out.println(schedule);
+        Doctor d = new Doctor("Jane", "Doe", "987654321", new Date(), "987654321", "Cardiology");
+        Doctor doctor1 = new Doctor("John", "Doe", "123456789", new Date(), "123456789", "Cardiology");
 
         Date d1 = new Date();
         Date d2 = new Date(2023 - 1900, 11, 24); // Date is deprecated and the constructor set the year to 1900 + the
@@ -52,6 +48,16 @@ public class Test {
         System.out.println(d);
 
         PatientManager pm = new PatientManager();
+        DoctorManager dm = new DoctorManager();
+
+        dm.addDoctor(d);
+        dm.addDoctor(doctor1);
+
+        dm.writeFile("Data/doctors.json");
+
+        dm.addDoctorByJSON("Data/doctors.json");
+
+        dm.writeFile("Data/doctors2.json");
 
         pm.addPatient(p);
         pm.addPatient(p1);

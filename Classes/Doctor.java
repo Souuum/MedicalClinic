@@ -10,20 +10,27 @@ import java.util.ArrayList;
 public class Doctor extends Person {
 
     private String specialty;
-    private Schedule schedule;
+    private Schedule schedule = new Schedule();
     private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
 
     public Doctor() {
     }
 
-    public Doctor(String f, String l, String s, Date d, String p, String i, String sp, Schedule sc) {
+    public Doctor(String f, String l, String s, Date d, String p, String sp, Schedule sc) {
         super(f, l, s, d, p);
         this.specialty = sp;
         this.schedule = sc;
     }
 
-    public Doctor(String f, String l, String s, Date d, String p, String i, String sp) {
+    public Doctor(String f, String l, String s, Date d, String p, String sp) {
+        super(f, l, s, d, p);
+        setSpecialty(sp);
+        appointments = new ArrayList<>();
+        billings = new ArrayList<>();
+    }
+
+    public Doctor(String f, String l, String s, String d, String p, String sp) {
         super(f, l, s, d, p);
         setSpecialty(sp);
         appointments = new ArrayList<>();

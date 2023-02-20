@@ -4,32 +4,26 @@ import java.util.*;
 import java.io.*;
 import java.util.Scanner;
 import java.io.IOException;
+import java.io.File;
 
 public class PatientManager {
-    private String firstName;
-    private String lastName;
-    private String socialNumber;
-    private String birthDate;
-    private String phoneNumber;
-    private String insuranceCompany;
     private static Scanner sc = new Scanner(System.in);
 
-    private List<Patient> patients = new ArrayList<>();
+    private List<Patient> patients = new ArrayList<Patient>();
 
     public void addPatientByFile(String fileName) throws FileNotFoundException {
-
         Scanner inFile = new Scanner(new File(fileName));
         while (inFile.hasNext()) {
-            firstName = inFile.next();
-            lastName = inFile.next();
-            socialNumber = inFile.next();
-            birthDate = inFile.next();
+            String firstName = inFile.next();
+            String lastName = inFile.next();
+            String socialNumber = inFile.next();
+            String birthDate = inFile.next();
             int year = Integer.parseInt(birthDate.substring(0, 4));
             int month = Integer.parseInt(birthDate.substring(4, 6));
             int day = Integer.parseInt(birthDate.substring(6, 8));
             Date bd = new Date(year - 1900, month - 1, day);
-            phoneNumber = inFile.next();
-            insuranceCompany = inFile.next();
+            String phoneNumber = inFile.next();
+            String insuranceCompany = inFile.next();
             Patient p = new Patient(firstName, lastName, socialNumber, bd, phoneNumber,
                     insuranceCompany);
             patients.add(p);
@@ -97,7 +91,7 @@ public class PatientManager {
             System.out.println("No patients found");
         } else {
             for (Patient p : patients) {
-                System.out.println(p.toString());
+                System.out.println(p);
             }
         }
     }
@@ -128,21 +122,21 @@ public class PatientManager {
     public void addPatient() {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter first name: ");
-        firstName = input.next();
+        String firstName = input.next();
         System.out.println("Enter last name: ");
-        lastName = input.next();
+        String lastName = input.next();
         System.out.println("Enter social number: ");
-        socialNumber = input.next();
+        String socialNumber = input.next();
         System.out.println("Enter birth date: ");
-        birthDate = input.next();
+        String birthDate = input.next();
         int year = Integer.parseInt(birthDate.substring(0, 4));
         int month = Integer.parseInt(birthDate.substring(4, 6));
         int day = Integer.parseInt(birthDate.substring(6, 8));
         Date bd = new Date(year - 1900, month - 1, day);
         System.out.println("Enter phone number: ");
-        phoneNumber = input.next();
+        String phoneNumber = input.next();
         System.out.println("Enter insurance company: ");
-        insuranceCompany = input.next();
+        String insuranceCompany = input.next();
         Patient p = new Patient(firstName, lastName, socialNumber, bd, phoneNumber, insuranceCompany);
         patients.add(p);
         input.close();
@@ -158,18 +152,6 @@ public class PatientManager {
             }
         }
         input.close();
-    }
-
-    public void updatePatient() {
-        for (Patient p : patients) {
-            if (p.getSocialNumber().equals(socialNumber)) {
-                p.setFirstName(firstName);
-                p.setLastName(lastName);
-                p.setBirthDate(birthDate);
-                p.setPhoneNumber(phoneNumber);
-                p.setInsuranceCompany(insuranceCompany);
-            }
-        }
     }
 
     // sort patients by first name

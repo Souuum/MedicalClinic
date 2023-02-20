@@ -40,13 +40,17 @@ public class Schedule {
     }
 
     public String toJSON() {
-        String s = "";
+        String s = "[";
         for (int i = 0; i < 52; i++) {
             if (this.schedule[i].toString() != "") {
-                s += this.schedule[i].toJSON();
+                s += this.schedule[i].toJSON() + "\n";
             }
         }
-        return s == "" ? "No appointments" : s;
+        if (s.length() > 1) {
+            s = s.substring(0, s.length() - 3);
+        }
+        s += "]";
+        return s;
     }
 
     @Override
