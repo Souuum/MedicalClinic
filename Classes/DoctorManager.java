@@ -45,21 +45,24 @@ public class DoctorManager {
 
             for (String doctorData : doctorsData) {
                 doctorData = doctorData.trim();
+                System.out.println(doctorData);
                 if (doctorData.charAt(doctorData.length() - 1) != '}') {
                     doctorData += "}";
                 }
-                String firstName = doctorData.substring(doctorData.indexOf("firstName") + 14,
+                String firstName = doctorData.substring(doctorData.indexOf("firstName") + 12,
                         doctorData.indexOf("lastName") - 5);
                 String lastName = doctorData.substring(doctorData.indexOf("lastName") + 13,
                         doctorData.indexOf("socialNumber") - 5);
-                String socialNumber = doctorData.substring(doctorData.indexOf("socialNumber") + 19,
+                String socialNumber = doctorData.substring(doctorData.indexOf("socialNumber") + 17,
                         doctorData.indexOf("birthDate") - 5);
                 String birthDate = doctorData.substring(doctorData.indexOf("birthDate") + 14,
-                        doctorData.indexOf("phone") - 5);
-                String phoneNumber = doctorData.substring(doctorData.indexOf("phone") + 9,
-                        doctorData.indexOf("id") - 5);
+                        doctorData.indexOf("phoneNumber") - 5);
+                String phoneNumber = doctorData.substring(doctorData.indexOf("phoneNumber") + 16,
+                        doctorData.indexOf("specialty") - 5);
                 String specialty = doctorData.substring(doctorData.indexOf("specialty") + 14,
-                        doctorData.indexOf("patients") - 5);
+                        doctorData.indexOf("schedule") - 5);
+
+                System.out.println(firstName + lastName + socialNumber + birthDate + phoneNumber + specialty);
 
                 Doctor d = new Doctor(firstName, lastName, socialNumber, birthDate, phoneNumber, specialty);
                 doctors.add(d);
@@ -118,10 +121,6 @@ public class DoctorManager {
                 return;
             }
         }
-        System.out.println("Doctor not found");
-    }
-
-    
 
     public ArrayList<Doctor> getDoctors() {
         return doctors;

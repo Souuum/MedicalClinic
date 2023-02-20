@@ -87,15 +87,15 @@ public class Doctor extends Person {
     }
 
     public String toJSON() {
-        return "{" +
-                "\"firstName\":\"" + firstName + '\"' +
-                ", \"lastName\":\"" + lastName + '\"' +
-                ", \"socialNumber\":\"" + socialNumber + '\"' +
-                ", \"birthDate\":\"" + birthDate + '\"' +
-                ", \"phoneNumber\":\"" + phoneNumber + '\"' +
-                ", \"specialty\":\"" + specialty + '\"' +
-                ", \"schedule\":" + schedule.toJSON() +
-                '}';
+        return "{\n" +
+                "  \"firstName\" : \"" + firstName + "\",\n" +
+                "  \"lastName\" : \"" + lastName + "\",\n" +
+                "  \"socialNumber\" : \"" + socialNumber + "\",\n" +
+                "  \"birthDate\" : \"" + birthDate + "\",\n" +
+                "  \"phoneNumber\" : \"" + phoneNumber + "\",\n" +
+                "  \"specialty\" : \"" + specialty + "\",\n" +
+                "  \"schedule\" : " + schedule.toJSON() + "\n" +
+                "}";
     }
 
     @Override

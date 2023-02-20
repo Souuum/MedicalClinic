@@ -47,7 +47,7 @@ public class PatientManager {
                 if (patientData.charAt(patientData.length() - 1) != '}') {
                     patientData += "}";
                 }
-                String firstName = patientData.substring(patientData.indexOf("firstName") + 14,
+                String firstName = patientData.substring(patientData.indexOf("firstName") + 12,
                         patientData.indexOf("lastName") - 5);
                 String lastName = patientData.substring(patientData.indexOf("lastName") + 13,
                         patientData.indexOf("socialNumber") - 5);
