@@ -240,12 +240,12 @@ public class PatientManager {
                 String date = input.next();
                 System.out.println("Enter time: ");
                 String time = input.next();
-                System.out.println("Enter doctor: ");
-                String doctor = input.next();
+                System.out.println("Enter doctor social number: ");
+                String doctorSocialNumber = input.next();
                 System.out.println("Enter reason: ");
-                String reason = input.next();
+                int hour = input.nextInt();
                 System.out.println("Enter ");
-                Appointment a = new Appointment(date, time, doctor, reason, p);
+                Appointment a = new Appointment();
                 appointments.add(a);
             }
         }

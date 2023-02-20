@@ -129,7 +129,6 @@ public class Patient extends Person {
         setInsuranceCompany(i);
         appointments = new ArrayList<>();
         billings = new ArrayList<>();
-        medicalHistory = new ArrayList<>();
     }
 
     public String getInsuranceCompany() {
