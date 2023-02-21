@@ -122,9 +122,8 @@ public class PatientManager {
     }
 
     public void searchPatient() {
-        Scanner input = new Scanner(System.in);
         System.out.println("Enter social number: ");
-        String socialNumber = input.next();
+        String socialNumber = sc.next();
 
         boolean patientFound = false;
 
@@ -137,34 +136,27 @@ public class PatientManager {
 
         if (!patientFound) {
             System.out.println("Patient not found");
-            input.close();
 
             return;
         }
-        input.close();
     }
 
     public void addPatient() {
-        Scanner input = new Scanner(System.in);
         System.out.println("Enter first name: ");
-        String firstName = input.next();
+        String firstName = sc.next();
         System.out.println("Enter last name: ");
-        String lastName = input.next();
+        String lastName = sc.next();
         System.out.println("Enter social number: ");
-        String socialNumber = input.next();
+        String socialNumber = sc.next();
         System.out.println("Enter birth date: ");
-        String birthDate = input.next();
-        int year = Integer.parseInt(birthDate.substring(0, 4));
-        int month = Integer.parseInt(birthDate.substring(4, 6));
-        int day = Integer.parseInt(birthDate.substring(6, 8));
-        Date bd = new Date(year - 1900, month - 1, day);
+        String birthDate = sc.next();
+
         System.out.println("Enter phone number: ");
-        String phoneNumber = input.next();
+        String phoneNumber = sc.next();
         System.out.println("Enter insurance company: ");
-        String insuranceCompany = input.next();
-        Patient p = new Patient(firstName, lastName, socialNumber, bd, phoneNumber, insuranceCompany);
+        String insuranceCompany = sc.next();
+        Patient p = new Patient(firstName, lastName, socialNumber, birthDate, phoneNumber, insuranceCompany);
         patients.add(p);
-        input.close();
     }
 
     public void deletePatient() {
@@ -303,7 +295,7 @@ public class PatientManager {
                 case 7:
                     System.out.println("Import patients from JSON");
                     System.out.println("====================================");
-                    this.addPatientByJSON("Data/patients.json");
+                    this.addPatientByJSON(null);
                 case 8:
                     System.out.println("Return to main menu");
                     System.out.println("====================================");

@@ -35,14 +35,13 @@ public class MainMenu {
 
         int option = 0;
 
-        while (option != 4) {
+        while (option != 3) {
             System.out.println("===============================================");
             System.out.println("Please choose an option:");
             System.out.println("===============================================");
             System.out.println("1. Display patients menu");
             System.out.println("2. Display doctors menu");
-            System.out.println("3. Run demo");
-            System.out.println("4. Quit");
+            System.out.println("3. Quit");
             System.out.println("===============================================");
             option = sc.nextInt();
 
@@ -58,9 +57,6 @@ public class MainMenu {
                     dm.menuDoctor();
                     break;
                 case 3:
-                    MainMenu.test();
-                    break;
-                case 4:
                     System.out.println("You choose to quit.");
                     System.out.println("===============================================");
                     break;

@@ -28,13 +28,9 @@ public class DoctorManager {
             String lastName = inFile.next();
             String socialNumber = inFile.next();
             String birthDate = inFile.next();
-            int year = Integer.parseInt(birthDate.substring(0, 4));
-            int month = Integer.parseInt(birthDate.substring(4, 6));
-            int day = Integer.parseInt(birthDate.substring(6, 8));
-            Date bd = new Date(year - 1900, month - 1, day);
             String phone = inFile.next();
             String specialty = inFile.next();
-            Doctor d = new Doctor(firstName, lastName, socialNumber, bd, phone, specialty);
+            Doctor d = new Doctor(firstName, lastName, socialNumber, birthDate, phone, specialty);
             doctors.add(d);
         }
         inFile.close();
@@ -115,15 +111,21 @@ public class DoctorManager {
         return pm.findPatient(sn);
     }
 
-    public void addDoctor(Doctor d) {
-        try {
-            if (d == null) {
-                throw new IllegalArgumentException("Doctor cannot be empty");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+    public void addDoctor() {
+        System.out.println("Enter first name: ");
+        String firstName = sc.next();
+        System.out.println("Enter last name: ");
+        String lastName = sc.next();
+        System.out.println("Enter social number: ");
+        String socialNumber = sc.next();
+        System.out.println("Enter birth date: ");
+        String birthDate = sc.next();
+
+        System.out.println("Enter phone number: ");
+        String phoneNumber = sc.next();
+        System.out.println("Enter the specialty: ");
+        String specialty = sc.next();
+        Doctor d = new Doctor(firstName, lastName, socialNumber, birthDate, phoneNumber, specialty);
         doctors.add(d);
     }
 
@@ -429,6 +431,11 @@ public class DoctorManager {
                     System.out.println("====================================");
                     searchDoctor();
                     break;
+                case 3:
+                    System.out.println("Add a doctor");
+                    System.out.println("====================================");
+                    addDoctor();
+                    break;
                 case 4:
                     System.out.println("Add doctor by file");
                     System.out.println("====================================");
@@ -447,7 +454,7 @@ public class DoctorManager {
                 case 7:
                     System.out.println("Import doctors from JSON");
                     System.out.println("====================================");
-                    this.addDoctorByJSON("Data/doctors.json");
+                    this.addDoctorByJSON(null);
                     break;
                 case 8:
                     System.out.println("Create an appointment for a patient");
