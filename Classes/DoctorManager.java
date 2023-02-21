@@ -2,6 +2,7 @@ package Classes;
 
 import java.util.*;
 import java.io.*;
+import java.util.Date;
 
 public class DoctorManager {
 
@@ -9,7 +10,7 @@ public class DoctorManager {
     private PatientManager pm;
     private static Scanner sc = new Scanner(System.in);
     private ArrayList<Appointment> appointments;
-    private ArrayList<Billing> billings;
+    private ArrayList<Billing> billings = new ArrayList<Billing>();
 
     public DoctorManager() {
     }
@@ -90,14 +91,11 @@ public class DoctorManager {
                         String sn = app.substring(app.indexOf("patient socialnumber") + 24, app.indexOf("date") - 11);
                         Patient p = this.findPatient(sn);
                         System.out.println(p);
-                        String date = app.substring(app.indexOf("date") + 8, app.indexOf("hour") - 5);
-                        int year = Integer.parseInt(date.substring(6, 9));
-                        int month = Integer.parseInt(date.substring(3, 5));
-                        int day = Integer.parseInt(date.substring(0, 2));
+                        String date = app.substring(app.indexOf("date") + 8, app.indexOf("hour") - 11);
                         String hour = app.substring(app.indexOf("hour") + 7, app.length() - 4).trim();
                         int h = Integer.parseInt(hour);
 
-                        d.getSchedule().addAppointment(new Appointment(d, p, new Date(year - 1900, month - 1, day), h));
+                        d.getSchedule().addAppointment(new Appointment(d, p, date, h));
 
                     }
                 }
@@ -217,10 +215,7 @@ public class DoctorManager {
         System.out.println("Enter appointment hour : ");
         int hour = Integer.parseInt(sc.nextLine());
 
-        Appointment appointment = new Appointment(doctor, patient,
-                new Date(Integer.parseInt(date.substring(6, 10)) - 1900,
-                        Integer.parseInt(date.substring(3, 5)) - 1, Integer.parseInt(date.substring(0, 2))),
-                hour);
+        Appointment appointment = new Appointment(doctor, patient, date, hour);
         doctor.getSchedule().addAppointment(appointment);
         System.out.println("Done !");
     }
@@ -255,16 +250,35 @@ public class DoctorManager {
             System.out.println("Patient not found");
             return;
         }
-
+        System.out.println("Enter doctor's social number : ");
+        String doctorSocialNumber = sc.nextLine();
+        Doctor doctor = this.findDoctor(doctorSocialNumber);
+        if (doctor == null) {
+            System.out.println("Doctor not found");
+            return;
+        }
         System.out.println("Enter appointment date (dd/mm/yyyy) : ");
         String date = sc.nextLine();
-        Appointment appointment = null;
-        for (Appointment a : appointments) {
-            if (a.getPatient().equals(patient) && a.getDate().equals(date)) {
-                appointment = a;
-                break;
+        System.out.println("Enter appointment hour : ");
+        int hour = Integer.parseInt(sc.nextLine());
+        for (Appointment a : doctor.getSchedule().getAllAppointments()) {
+            if (a != null) {
+                System.out.println(a);
+                if (a.getPatient().getSocialNumber().equals(socialNumber)
+                        && a.getDate().equals(date)
+                        && a.getHour() == hour) {
+                    System.out.println("Enter the amount of the bill : ");
+                    double amount = Double.parseDouble(sc.nextLine());
+                    Billing billing = new Billing(a, amount);
+                    billings.add(billing);
+                    System.out.println("Done !");
+                    return;
+                }
             }
+
         }
+        System.out.println("No match found !");
+
     }
 
     public void listAllBillings() {
@@ -378,9 +392,7 @@ public class DoctorManager {
                     System.out.println("Create a billing for a patient");
                     System.out.println("====================================");
                     createBillingForPatient();
-
                     break;
-
                 case 12:
                     System.out.println("Search and display all billing for a patient");
                     System.out.println("====================================");

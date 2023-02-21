@@ -24,6 +24,13 @@ public class Appointment {
         setHour(hour);
     }
 
+    public Appointment(Doctor doctor, Patient patient, String date, int hour) {
+        setDoctor(doctor);
+        setPatient(patient);
+        setDate(date);
+        setHour(hour);
+    }
+
     public Doctor getDoctor() {
         return this.doctor;
     }
@@ -58,6 +65,20 @@ public class Appointment {
 
     public String getDate() {
         return this.date;
+    }
+
+    public void setDate(String date) {
+        try {
+            if (date == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error: Null value in Appointment constructor");
+            return;
+        }
+        this.date = date;
+        setMonth(this.date);
+        setDay(this.date);
     }
 
     public void setDate(Date date) {

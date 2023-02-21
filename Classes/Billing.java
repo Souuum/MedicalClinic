@@ -15,7 +15,7 @@ public class Billing {
     public Billing() {
     }
 
-    public Billing(Appointment a, Double c) {
+    public Billing(Appointment a, Double amount) {
         setPatient(a.getPatient());
         setDoctor(a.getDoctor());
         setAppointment(a);
@@ -112,10 +112,10 @@ public class Billing {
     @Override
     public String toString() {
         return "{" +
-                " patient='" + getPatient() + "'" +
-                ", doctor='" + getDoctor() + "'" +
-                ", date='" + getDate() + "'" +
-                ", amount='" + getAmount() + "'" +
+                " patient='" + patient.getName() + "'" +
+                ", doctor='" + doctor.getName() + "'" +
+                ", date='" + appointment.getDate() + "'" +
+                ", amount='" + amount + "'" +
                 "}";
     }
 

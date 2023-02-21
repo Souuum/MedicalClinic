@@ -1,5 +1,7 @@
 package Classes;
 
+import java.util.ArrayList;
+
 public class Schedule {
     // Class which implements the schedule of the doctor
     // It will be used to check if the doctor is available at a certain time
@@ -43,16 +45,14 @@ public class Schedule {
         this.schedule[indexW].addAppointment(appointment, nday);
     }
 
-    public Appointment[] getAllAppointments() {
+    public ArrayList<Appointment> getAllAppointments() {
         // Method which returns all the appointments of the schedule
-        Appointment[] appointments = new Appointment[52 * 7 * 24];
-        int index = 0;
+        ArrayList<Appointment> appointments = new ArrayList<Appointment>();
         for (int i = 0; i < 52; i++) {
             for (int j = 0; j < 7; j++) {
                 for (int k = 0; k < 24; k++) {
                     if (this.schedule[i].getWeek()[j][k] != null) {
-                        appointments[index] = this.schedule[i].getWeek()[j][k];
-                        index++;
+                        appointments.add(this.schedule[i].getWeek()[j][k]);
                     }
                 }
             }
