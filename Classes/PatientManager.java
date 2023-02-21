@@ -69,12 +69,11 @@ public class PatientManager {
     }
 
     public Patient findPatient(String sn) {
+        System.out.println("----------------------");
         System.out.println("looking for patient with socialnumber " + sn);
-        System.out.println(sn.length());
-        for (Patient p : patients) {
-            System.out.println(p.getSocialNumber());
-            System.out.println(p.getSocialNumber().length());
+        System.out.println("----------------------");
 
+        for (Patient p : patients) {
             if (p.getSocialNumber().equals(sn)) {
                 return p;
             }

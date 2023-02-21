@@ -88,7 +88,7 @@ public class Doctor extends Person {
 
     public String toJSON() {
         return "{\n" +
-                "  \"firstName\" : \"" + firstName + "\",\n" +
+                "\"firstName\" : \"" + firstName + "\",\n" +
                 "  \"lastName\" : \"" + lastName + "\",\n" +
                 "  \"socialNumber\" : \"" + socialNumber + "\",\n" +
                 "  \"birthDate\" : \"" + birthDate + "\",\n" +

@@ -49,9 +49,10 @@ public class DoctorManager {
             }
             inFile.close();
             data = data.substring(1, data.length() - 1);
-            String[] doctorsData = data.split("},f");
+            String[] doctorsData = data.split("\\},\\{\"f");
 
             for (String doctorData : doctorsData) {
+                System.out.println(doctorData);
                 doctorData = doctorData.trim();
                 if (doctorData.charAt(doctorData.length() - 1) != '}') {
                     doctorData += "}";
@@ -68,31 +69,37 @@ public class DoctorManager {
                         doctorData.indexOf("specialty") - 5);
                 String specialty = doctorData.substring(doctorData.indexOf("specialty") + 14,
                         doctorData.indexOf("schedule") - 5);
-
+                System.out.println("----------------------");
+                System.out.println("Adding doctor " + firstName + " " + lastName);
                 Doctor d = new Doctor(firstName, lastName, socialNumber, birthDate, phoneNumber, specialty);
+                System.out.println("----------------------");
 
                 // Schedule import
 
                 String scheduleData = doctorData.substring(doctorData.indexOf("schedule") + 13,
                         doctorData.indexOf("]}"));
-                String[] sd = scheduleData.split("},");
-                sd[sd.length - 1] = sd[sd.length - 1].substring(0, sd[sd.length - 1].length() - 1); // getting rid of
-                                                                                                    // the la
-                                                                                                    // t }
-                for (String app : sd) {
-                    String sn = app.substring(app.indexOf("patient socialnumber") + 25, app.indexOf("date") - 5);
-                    Patient p = this.findPatient(sn);
-                    System.out.println(p);
-                    String date = app.substring(app.indexOf("date") + 9, app.indexOf("hour") - 5);
-                    int year = Integer.parseInt(date.substring(6, 9));
-                    int month = Integer.parseInt(date.substring(3, 5));
-                    int day = Integer.parseInt(date.substring(0, 2));
-                    String hour = app.substring(app.indexOf("hour") + 8, app.length());
-                    int h = Integer.parseInt(hour);
+                if (scheduleData.length() > 3) {
+                    String[] sd = scheduleData.split("},");
+                    sd[sd.length - 1] = sd[sd.length - 1].substring(0, sd[sd.length - 1].length() - 1); // getting rid
+                                                                                                        // of
+                                                                                                        // the la
+                                                                                                        // t }
+                    for (String app : sd) {
+                        String sn = app.substring(app.indexOf("patient socialnumber") + 25, app.indexOf("date") - 5);
+                        Patient p = this.findPatient(sn);
+                        System.out.println(p);
+                        String date = app.substring(app.indexOf("date") + 9, app.indexOf("hour") - 5);
+                        int year = Integer.parseInt(date.substring(6, 9));
+                        int month = Integer.parseInt(date.substring(3, 5));
+                        int day = Integer.parseInt(date.substring(0, 2));
+                        String hour = app.substring(app.indexOf("hour") + 8, app.length());
+                        int h = Integer.parseInt(hour);
 
-                    d.getSchedule().addAppointment(new Appointment(d, p, new Date(year - 1900, month - 1, day), h));
+                        d.getSchedule().addAppointment(new Appointment(d, p, new Date(year - 1900, month - 1, day), h));
 
+                    }
                 }
+
                 doctors.add(d);
             }
         } catch (FileNotFoundException e) {
