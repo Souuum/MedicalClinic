@@ -32,7 +32,7 @@ public class MainMenu {
 
         int option = 0;
 
-        while (option != 3) {
+        while (option != 5) {
             System.out.println("===============================================");
             System.out.println("Please choose an option:");
             System.out.println("===============================================");
