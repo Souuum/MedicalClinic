@@ -19,7 +19,9 @@ public class DoctorManager {
         this.pm = pm;
     }
 
-    public void addDoctorByFile(String fileName) throws FileNotFoundException {
+    public void addDoctorByFile() throws FileNotFoundException {
+        System.out.println("Enter the file directory and don't forget the file extension .txt");
+        String fileName = sc.nextLine();
         Scanner inFile = new Scanner(new File(fileName));
         while (inFile.hasNext()) {
             String firstName = inFile.next();
@@ -165,17 +167,34 @@ public class DoctorManager {
         return null;
     }
 
+    public void deleteDoctor() {
+
+        System.out.println("Enter social number: ");
+        String socialNumber = sc.nextLine();
+        System.out.println("Deleting Doctor with socialnumber " + socialNumber);
+        Doctor d = this.findDoctor(socialNumber);
+
+        doctors.remove(d);
+        System.out.println("Done ! ");
+
+    }
+
     public Doctor findDoctor(String sn) {
+        System.out.println("----------------------");
+        System.out.println("looking for Doctor with socialnumber " + sn);
+        System.out.println("----------------------");
+
         for (Doctor d : doctors) {
-            if (d.getSocialNumber() == sn) {
+            if (d.getSocialNumber().equals(sn)) {
+                System.out.println("Find a match");
                 return d;
             }
         }
+        System.out.println("No match found");
         return null;
     }
 
     public void createBillingForPatient() {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter patient's social number : ");
         String socialNumber = sc.nextLine();
         Patient patient = null;
@@ -287,25 +306,15 @@ public class DoctorManager {
                     System.out.println("====================================");
                     searchDoctor();
                     break;
-                case 3:
-                    System.out.println("Add a doctor");
-                    System.out.println("====================================");
-                    addDoctor();
-                    break;
                 case 4:
                     System.out.println("Add doctor by file");
                     System.out.println("====================================");
                     addDoctorByFile();
                     break;
                 case 5:
-                    System.out.println("Download doctor file");
+                    System.out.println("Export doctors as JSON");
                     System.out.println("====================================");
-                    downloadDoctorFile();
-                    break;
-                case 6:
-                    System.out.println("Update a doctor");
-                    System.out.println("====================================");
-                    updateDoctor();
+                    writeFile("Data/doctorsExport.json");
                     break;
                 case 7:
                     System.out.println("Delete a doctor");

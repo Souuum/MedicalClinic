@@ -31,8 +31,10 @@ public class PatientManager {
         inFile.close();
     }
 
-    public void addPatientByJSON(String fileName) {
+    public void addPatientByJSON() {
         try {
+            String fileName = sc.nextLine();
+
             Scanner inFile = new Scanner(new File(fileName));
             String data = "";
             while (inFile.hasNext()) {
@@ -80,9 +82,11 @@ public class PatientManager {
 
         for (Patient p : patients) {
             if (p.getSocialNumber().equals(sn)) {
+                System.out.println("Find a match");
                 return p;
             }
         }
+        System.out.println("No match found");
         return null;
     }
 
@@ -161,15 +165,15 @@ public class PatientManager {
     }
 
     public void deletePatient() {
-        Scanner input = new Scanner(System.in);
+
         System.out.println("Enter social number: ");
-        String socialNumber = input.next();
-        for (Patient p : patients) {
-            if (p.getSocialNumber().equals(socialNumber)) {
-                patients.remove(p);
-            }
-        }
-        input.close();
+        String socialNumber = sc.nextLine();
+        System.out.println("Deleting patient with socialnumber " + socialNumber);
+        Patient p = this.findPatient(socialNumber);
+
+        patients.remove(p);
+        System.out.println("Done ! ");
+
     }
 
     // sort patients by first name
@@ -242,20 +246,15 @@ public class PatientManager {
         int option = 0;
         System.out.println("Choose an option :");
 
-        while (option != 13) {
+        while (option != 8) {
             System.out.println("1. List all patients");
             System.out.println("2. Search and display a patient");
             System.out.println("3. Add a patient");
             System.out.println("4. Add patient by file");
-            System.out.println("5. Download patient file");
-            System.out.println("6. Update a patient");
-            System.out.println("7. Delete a patient");
-            System.out.println("8. List all appointments");
-            System.out.println("9. Search and display an appointment");
-            System.out.println("10. Add an appointment");
-            System.out.println("11. Update an appointment");
-            System.out.println("12. Delete an appointment");
-            System.out.println("13. Return to main menu");
+            System.out.println("5. Delete a patientN");
+            System.out.println("6. Export patients to JSON");
+            System.out.println("7. Import patients from JSON");
+            System.out.println("8. Return to main menu");
             option = sc.nextInt();
             sc.nextLine();
 
@@ -285,44 +284,24 @@ public class PatientManager {
                     }
                     break;
                 case 5:
-                    System.out.println("Download patient file");
-                    System.out.println("====================================");
-                    try {
-                        this.writeFile("DownloadPatient.txt");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case 6:
-                    System.out.println("Update a patient");
-                    System.out.println("====================================");
-                    break;
-                case 7:
                     System.out.println("Delete a patient");
                     System.out.println("====================================");
                     this.deletePatient();
                     break;
+                case 6:
+                    System.out.println("Export Patients as JSON");
+                    System.out.println("====================================");
+                    try {
+                        this.writeFile("Data/patientsExport.json");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 7:
+                    System.out.println("Import patients from JSON");
+                    System.out.println("====================================");
+                    this.addPatientByJSON();
                 case 8:
-                    System.out.println("List all appointments");
-                    System.out.println("====================================");
-                    break;
-                case 9:
-                    System.out.println("Search and display an appointment");
-                    System.out.println("====================================");
-                    break;
-                case 10:
-                    System.out.println("Add an appointment");
-                    System.out.println("====================================");
-                    break;
-                case 11:
-                    System.out.println("Update an appointment");
-                    System.out.println("====================================");
-                    break;
-                case 12:
-                    System.out.println("Delete an appointment");
-                    System.out.println("====================================");
-                    break;
-                case 13:
                     System.out.println("Return to main menu");
                     System.out.println("====================================");
                     break;
