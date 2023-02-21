@@ -1,18 +1,16 @@
 package Classes;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
+import java.util.*;
+import java.io.*;
 
 public class DoctorManager {
 
     private ArrayList<Doctor> doctors = new ArrayList<Doctor>();
     private PatientManager pm;
     private static Scanner sc = new Scanner(System.in);
+    private ArrayList<Patient> patients = new ArrayList<>();
+    private ArrayList<Appointment> appointments;
+    private ArrayList<Billing> billings;
 
     public DoctorManager() {
     }
@@ -174,6 +172,79 @@ public class DoctorManager {
         return null;
     }
 
+    public void createBillingForPatient() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter patient's social number : ");
+        String socialNumber = sc.nextLine();
+        Patient patient = null;
+        for (Patient p : patients) {
+            if (p.getSocialNumber().equals(socialNumber)) {
+                patient = p;
+                break;
+            }
+        }
+        if (patient == null) {
+            System.out.println("Patient not found");
+            return;
+        }
+
+        System.out.println("Enter appointment date (dd/mm/yyyy) : ");
+        String date = sc.nextLine();
+        Appointment appointment = null;
+        for (Appointment a : appointments) {
+            if (a.getPatient().equals(patient) && a.getDate().equals(date)) {
+                appointment = a;
+                break;
+            }
+        }
+
+        if (appointment == null) {
+            System.out.println("No appointment found for this patient on this date");
+            return;
+        }
+
+        System.out.println("Enter amount : ");
+        double amount = sc.nextDouble();
+        Billing billing = new Billing(patient, appointment, amount);
+        billings.add(billing);
+        System.out.println("Billing created for " + patient.getFirstName() + " for an amount of " + amount + "€");
+    }
+
+    public void listAllBillings() {
+        if (billings.isEmpty()) {
+            System.out.println("There are no billings");
+        } else {
+            for (Billing b : billings) {
+                System.out.println(b);
+            }
+        }
+    }
+
+    public void searchBillings() {
+        System.out.println("Enter patient's social number : ");
+        String socialNumber = sc.nextLine();
+        Patient patient = null;
+        for (Patient p : patients) {
+            if (p.getSocialNumber().equals(socialNumber)) {
+                patient = p;
+                break;
+            }
+        }
+        if (patient == null) {
+            System.out.println("Patient not found");
+            return;
+        }
+
+        for (Billing b : billings) {
+            if (b.getPatient().equals(patient)) {
+                System.out.println(b);
+            }
+        }
+    }
+
+
+
+
     public ArrayList<Doctor> getDoctors() {
         return doctors;
     }
@@ -186,7 +257,7 @@ public class DoctorManager {
         int option = 0;
         System.out.println("Choose an option :");
 
-        while (option != 12) {
+        while (option != 11) {
             System.out.println("1. List all doctors sort by first name");
             System.out.println("2. Search and display a doctor");
             System.out.println("3. Add a doctor");
@@ -197,8 +268,7 @@ public class DoctorManager {
             System.out.println("8. Create a billing for a patient");
             System.out.println("9. List all billings");
             System.out.println("10. Search and display all billing for a patient");
-            System.out.println("11. Search and display all billing for a doctor");
-            System.out.println("12. Return to main menu");
+            System.out.println("11. Return to main menu");
             option = sc.nextInt();
             sc.nextLine();
 
@@ -252,14 +322,9 @@ public class DoctorManager {
                 case 10:
                     System.out.println("Search and display all billing for a patient");
                     System.out.println("====================================");
-                    searchAllBillingsForPatient();
+                    searchBillings();
                     break;
                 case 11:
-                    System.out.println("Search and display all billing for a doctor");
-                    System.out.println("====================================");
-                    searchAllBillingsForDoctor();
-                    break;
-                case 12:
                     System.out.println("Return to main menu");
                     System.out.println("====================================");
                     break;

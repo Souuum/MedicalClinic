@@ -4,13 +4,14 @@ package Classes;
  * @author Souuum
  */
 
-import java.util.Date;
-import java.util.ArrayList;
+import java.util.*;
+
 
 public class Doctor extends Person {
 
     private String specialty;
     private Schedule schedule = new Schedule();
+    private ArrayList <Patient> patients = new ArrayList<>();
     private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
 
@@ -65,26 +66,30 @@ public class Doctor extends Person {
         return this.getName() + "'s schedule\n" + this.schedule.toString();
     }
 
-    public void generateBilling(Doctor doctor, Patient patient, Date date, double amount) {
-        // Vérifier si le patient a un rendez-vous avec ce médecin à cette date
-        Appointment appointment = null;
-        for (Appointment a : appointments) {
-            if (a.getDoctor().equals(doctor) && a.getPatient().equals(patient) && a.getDate().equals(date)) {
-                appointment = a;
-                break;
-            }
-        }
-        if (appointment == null) {
-            System.out.println("Aucun rendez-vous trouvé pour ce patient avec ce médecin à cette date");
-            return;
-        }
+    // public void generateBilling(Doctor doctor, Patient patient, Date date, double
+    // amount) {
+    // // Vérifier si le patient a un rendez-vous avec ce médecin à cette date
+    // Appointment appointment = null;
+    // for (Appointment a : appointments) {
+    // if (a.getDoctor().equals(doctor) && a.getPatient().equals(patient) &&
+    // a.getDate().equals(date)) {
+    // appointment = a;
+    // break;
+    // }
+    // }
+    // if (appointment == null) {
+    // System.out.println("Aucun rendez-vous trouvé pour ce patient avec ce médecin
+    // à cette date");
+    // return;
+    // }
 
-        // Ajouter la facture pour le patient
-        Billing billing = new Billing(patient, appointment, amount);
-        billings.add(billing);
-        System.out.println("Facture générée pour " + patient.getFirstName() + " pour un montant de " + amount + "€");
+    // // Ajouter la facture pour le patient
+    // Billing billing = new Billing(patient, appointment, amount);
+    // billings.add(billing);
+    // System.out.println("Facture générée pour " + patient.getFirstName() + " pour
+    // un montant de " + amount + "€");
 
-    }
+    // }
 
     public String toJSON() {
         return "{\n" +
