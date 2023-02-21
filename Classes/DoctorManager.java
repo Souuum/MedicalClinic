@@ -8,6 +8,7 @@ public class DoctorManager {
     private ArrayList<Doctor> doctors = new ArrayList<Doctor>();
     private PatientManager pm;
     private static Scanner sc = new Scanner(System.in);
+    private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
 
     public DoctorManager() {
@@ -195,7 +196,7 @@ public class DoctorManager {
         return null;
     }
 
-    public void createAppointmentForPatient() {
+    public void createBillingForPatient() {
         System.out.println("Enter patient's social number : ");
         String socialNumber = sc.nextLine();
         Patient patient = this.findPatient(socialNumber);
@@ -203,44 +204,14 @@ public class DoctorManager {
             System.out.println("Patient not found");
             return;
         }
-        System.out.println("Enter doctor's social number : ");
-        String doctorSocialNumber = sc.nextLine();
-        Doctor doctor = this.findDoctor(doctorSocialNumber);
-        if (doctor == null) {
-            System.out.println("Doctor not found");
-            return;
-        }
+
         System.out.println("Enter appointment date (dd/mm/yyyy) : ");
         String date = sc.nextLine();
-        System.out.println("Enter appointment hour : ");
-        int hour = Integer.parseInt(sc.nextLine());
-
-        Appointment appointment = new Appointment(doctor, patient,
-                new Date(Integer.parseInt(date.substring(6, 10)) - 1900,
-                        Integer.parseInt(date.substring(3, 5)) - 1, Integer.parseInt(date.substring(0, 2))),
-                hour);
-        doctor.getSchedule().addAppointment(appointment);
-        System.out.println("Done !");
-    }
-
-    public void listAllAppointmentForPatient() {
-        System.out.println("Enter patient's social number : ");
-        String socialNumber = sc.nextLine();
-        Patient patient = this.findPatient(socialNumber);
-        if (patient == null) {
-            System.out.println("Patient not found");
-            return;
-        }
-        System.out.println("Looking into Doctor's schedules...");
-
-        for (Doctor d : doctors) {
-            for (Appointment a : d.getSchedule().getAllAppointments()) {
-                if (a != null) {
-                    if (a.getPatient().getSocialNumber().equals(socialNumber)) {
-                        System.out.println(a);
-                    }
-                }
-
+        Appointment appointment = null;
+        for (Appointment a : appointments) {
+            if (a.getPatient().equals(patient) && a.getDate().equals(date)) {
+                appointment = a;
+                break;
             }
         }
     }
@@ -254,19 +225,26 @@ public class DoctorManager {
             return;
         }
 
-        if (appointment == null) {
-            System.out.println("No appointment found for this patient on this date");
+        if (doctor == null) {
+            System.out.println("Doctor not found");
             return;
         }
 
-        System.out.println("Enter amount : ");
-        double amount = sc.nextDouble();
-        Billing billing = new Billing(patient, appointment, amount);
-        billings.add(billing);
-        System.out.println("Billing created for " + patient.getFirstName() + " for an amount of " + amount + "€");
+        System.out.println("Enter the date of the appointment (dd/mm/yyyy) : ");
+        String date = sc.nextLine();
+        int year = Integer.parseInt(date.substring(6, 9));
+        int month = Integer.parseInt(date.substring(3, 5));
+        int day = Integer.parseInt(date.substring(0, 2));
+
+        System.out.println("Enter the amount of the billing : ");
+        double amount = Double.parseDouble(sc.nextLine());
+
+        billings.add(new Billing(patient, doctor, new Date(year - 1900, month - 1, day), amount));
+
     }
 
     public void listAllBillings() {
+        System.out.println("Loading billings...");
         if (billings.isEmpty()) {
             System.out.println("There are no billings");
         } else {

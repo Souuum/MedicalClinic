@@ -6,8 +6,6 @@ import java.util.ArrayList;
 public class Patient extends Person {
 
     private String insuranceCompany;
-    private ArrayList<String> medicalHistory;
-    private ArrayList<Billing> billings;
     PatientManager pm = new PatientManager();
 
     public Patient() {
@@ -16,15 +14,11 @@ public class Patient extends Person {
     public Patient(String f, String l, String s, Date date, String p, String i) {
         super(f, l, s, date, p);
         setInsuranceCompany(i);
-        billings = new ArrayList<>();
-        medicalHistory = new ArrayList<>();
     }
 
     public Patient(String f, String l, String s, String d, String p, String i) {
         super(f, l, s, d, p);
         setInsuranceCompany(i);
-        billings = new ArrayList<>();
-        medicalHistory = new ArrayList<>();
     }
 
     public String getInsuranceCompany() {
@@ -43,42 +37,6 @@ public class Patient extends Person {
             return;
         }
         this.insuranceCompany = insuranceCompany;
-    }
-
-    public ArrayList<Billing> getBillings() {
-        return billings;
-    }
-
-    public void addBilling(Billing billing) {
-        billings.add(billing);
-    }
-
-    public void removeBilling(Billing billing) {
-        billings.remove(billing);
-    }
-
-    public ArrayList<String> getMedicalHistory() {
-        return medicalHistory;
-    }
-
-    public void addMedicalHistory(String history) {
-        medicalHistory.add(history);
-    }
-
-    public void removeMedicalHistory(String history) {
-        medicalHistory.remove(history);
-    }
-
-    public String listBillings() {
-        if (billings.isEmpty()) {
-            return "Patient has no billings";
-        } else {
-            System.out.println("Billings to pay:");
-            for (Billing billing : billings) {
-                return "Patient has a billing of " + billing.getCosts() + " for " + billing.getServices();
-            }
-        }
-        return "";
     }
 
     public String toJSON() {

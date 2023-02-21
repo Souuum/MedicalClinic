@@ -14,11 +14,10 @@ public class Doctor extends Person {
     public Doctor() {
     }
 
-    public Doctor(String f, String l, String s, Date d, String p, String sp, Schedule sc) {
-        super(f, l, s, d, p);
-        this.specialty = sp;
-        this.schedule = sc;
-    }
+    // public Doctor(String f, String l, String s, Date d, String p, String sp,
+    // Schedule sc) {
+    // super(f, l, s, d, p);
+    // }
 
     public Doctor(String f, String l, String s, Date d, String p, String sp) {
         super(f, l, s, d, p);
