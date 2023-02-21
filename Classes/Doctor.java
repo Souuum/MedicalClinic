@@ -88,13 +88,13 @@ public class Doctor extends Person {
 
     public String toJSON() {
         return "{\n" +
-                "\"firstName\" : \"" + firstName + "\",\n" +
-                "  \"lastName\" : \"" + lastName + "\",\n" +
-                "  \"socialNumber\" : \"" + socialNumber + "\",\n" +
-                "  \"birthDate\" : \"" + birthDate + "\",\n" +
-                "  \"phoneNumber\" : \"" + phoneNumber + "\",\n" +
-                "  \"specialty\" : \"" + specialty + "\",\n" +
-                "  \"schedule\" : " + schedule.toJSON() + "\n" +
+                "\"firstName\": \"" + firstName + "\",\n" +
+                "  \"lastName\": \"" + lastName + "\",\n" +
+                "  \"socialNumber\": \"" + socialNumber + "\",\n" +
+                "  \"birthDate\": \"" + birthDate + "\",\n" +
+                "  \"phoneNumber\": \"" + phoneNumber + "\",\n" +
+                "  \"specialty\": \"" + specialty + "\",\n" +
+                "  \"schedule\": " + schedule.toJSON() + "\n" +
                 "}";
     }
 

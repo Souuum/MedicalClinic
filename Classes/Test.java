@@ -52,8 +52,6 @@ public class Test {
         pm.addPatient(p);
         pm.addPatient(p1);
 
-        pm.writeFile("Data/patients.json");
-
         pm.addPatientByJSON("Data/patients.json");
 
         pm.writeFile("Data/patients2.json");

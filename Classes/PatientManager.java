@@ -41,26 +41,31 @@ public class PatientManager {
             inFile.close();
             data = data.substring(1, data.length() - 1);
             String[] patientsData = data.split("},");
+            patientsData[patientsData.length - 1] = patientsData[patientsData.length - 1].substring(0,
+                    patientsData[patientsData.length - 1].indexOf("}") - 2) + "}";
 
             for (String patientData : patientsData) {
                 patientData = patientData.trim();
                 if (patientData.charAt(patientData.length() - 1) != '}') {
                     patientData += "}";
                 }
-                String firstName = patientData.substring(patientData.indexOf("firstName") + 14,
-                        patientData.indexOf("lastName") - 5);
-                String lastName = patientData.substring(patientData.indexOf("lastName") + 13,
-                        patientData.indexOf("socialNumber") - 5);
-                String socialNumber = patientData.substring(patientData.indexOf("socialNumber") + 17,
-                        patientData.indexOf("birthDate") - 5);
-                String birthDate = patientData.substring(patientData.indexOf("birthDate") + 14,
-                        patientData.indexOf("phoneNumber") - 5);
-                String phoneNumber = patientData.substring(patientData.indexOf("phoneNumber") + 16,
-                        patientData.indexOf("insuranceCompany") - 5);
-                String insuranceCompany = patientData.substring(patientData.indexOf("insuranceCompany") + 21,
+                String firstName = patientData.substring(patientData.indexOf("firstName") + 13,
+                        patientData.indexOf("lastName") - 7);
+                String lastName = patientData.substring(patientData.indexOf("lastName") + 12,
+                        patientData.indexOf("socialNumber") - 7);
+                String socialNumber = patientData.substring(patientData.indexOf("socialNumber") + 16,
+                        patientData.indexOf("birthDate") - 7);
+                String birthDate = patientData.substring(patientData.indexOf("birthDate") + 13,
+                        patientData.indexOf("phoneNumber") - 7);
+                String phoneNumber = patientData.substring(patientData.indexOf("phoneNumber") + 15,
+                        patientData.indexOf("insuranceCompany") - 7);
+                String insuranceCompany = patientData.substring(patientData.indexOf("insuranceCompany") + 20,
                         patientData.indexOf("}") - 1);
                 Patient p = new Patient(firstName, lastName, socialNumber, birthDate, phoneNumber,
                         insuranceCompany);
+
+                System.out.println("----------------------");
+                System.out.println("Adding patient " + firstName + " " + lastName);
                 patients.add(p);
             }
         } catch (FileNotFoundException e) {

@@ -57,17 +57,17 @@ public class DoctorManager {
                 if (doctorData.charAt(doctorData.length() - 1) != '}') {
                     doctorData += "}";
                 }
-                String firstName = doctorData.substring(doctorData.indexOf("firstName") + 14,
+                String firstName = doctorData.substring(doctorData.indexOf("firstName") + 13,
                         doctorData.indexOf("lastName") - 5);
-                String lastName = doctorData.substring(doctorData.indexOf("lastName") + 13,
+                String lastName = doctorData.substring(doctorData.indexOf("lastName") + 12,
                         doctorData.indexOf("socialNumber") - 5);
-                String socialNumber = doctorData.substring(doctorData.indexOf("socialNumber") + 17,
+                String socialNumber = doctorData.substring(doctorData.indexOf("socialNumber") + 16,
                         doctorData.indexOf("birthDate") - 5);
-                String birthDate = doctorData.substring(doctorData.indexOf("birthDate") + 14,
+                String birthDate = doctorData.substring(doctorData.indexOf("birthDate") + 13,
                         doctorData.indexOf("phoneNumber") - 5);
-                String phoneNumber = doctorData.substring(doctorData.indexOf("phoneNumber") + 16,
+                String phoneNumber = doctorData.substring(doctorData.indexOf("phoneNumber") + 15,
                         doctorData.indexOf("specialty") - 5);
-                String specialty = doctorData.substring(doctorData.indexOf("specialty") + 14,
+                String specialty = doctorData.substring(doctorData.indexOf("specialty") + 13,
                         doctorData.indexOf("schedule") - 5);
                 System.out.println("----------------------");
                 System.out.println("Adding doctor " + firstName + " " + lastName);
@@ -76,7 +76,7 @@ public class DoctorManager {
 
                 // Schedule import
 
-                String scheduleData = doctorData.substring(doctorData.indexOf("schedule") + 13,
+                String scheduleData = doctorData.substring(doctorData.indexOf("schedule") + 12,
                         doctorData.indexOf("]}"));
                 if (scheduleData.length() > 3) {
                     String[] sd = scheduleData.split("},");
@@ -88,11 +88,11 @@ public class DoctorManager {
                         String sn = app.substring(app.indexOf("patient socialnumber") + 25, app.indexOf("date") - 5);
                         Patient p = this.findPatient(sn);
                         System.out.println(p);
-                        String date = app.substring(app.indexOf("date") + 9, app.indexOf("hour") - 5);
+                        String date = app.substring(app.indexOf("date") + 8, app.indexOf("hour") - 5);
                         int year = Integer.parseInt(date.substring(6, 9));
                         int month = Integer.parseInt(date.substring(3, 5));
                         int day = Integer.parseInt(date.substring(0, 2));
-                        String hour = app.substring(app.indexOf("hour") + 8, app.length());
+                        String hour = app.substring(app.indexOf("hour") + 7, app.length());
                         int h = Integer.parseInt(hour);
 
                         d.getSchedule().addAppointment(new Appointment(d, p, new Date(year - 1900, month - 1, day), h));
@@ -180,6 +180,10 @@ public class DoctorManager {
 
     public void setDoctors(ArrayList<Doctor> doctors) {
         this.doctors = doctors;
+    }
+
+    public PatientManager getPatientManager() {
+        return pm;
     }
 
     public void menuDoctor() {

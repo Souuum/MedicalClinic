@@ -4,13 +4,27 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    public static void main(String[] args) {
+    private static Scanner sc = new Scanner(System.in);
+    private static PatientManager pm = new PatientManager();
+    private static DoctorManager dm = new DoctorManager(pm);
+    private static Appointment menu3 = new Appointment();
+    private static Billing menu4 = new Billing();
 
-        Scanner sc = new Scanner(System.in);
-        Patient menu = new Patient();
-        Doctor menu2 = new Doctor();
-        Appointment menu3 = new Appointment();
-        Billing menu4 = new Billing();
+    public static void test() {
+        Patient p1 = new Patient("Jean", "Dupont", "03213452123", "03/11/1980", "0102030405", "Aetna");
+
+        System.out.println("...........................");
+        System.out.println("Adding patient from object");
+        dm.getPatientManager().addPatient(p1);
+        dm.getPatientManager().listAllPatients();
+        System.out.println("...........................");
+        System.out.println("Adding patient from JSON file");
+        dm.getPatientManager().addPatientByJSON("Data/patients.json");
+        dm.getPatientManager().listAllPatients();
+
+    }
+
+    public static void main(String[] args) {
 
         System.out.println("===============================================");
         System.out.println("Welcome to the medical center management system");
@@ -25,7 +39,8 @@ public class MainMenu {
             System.out.println("1. Display patients menu");
             System.out.println("2. Display doctors menu");
             System.out.println("3. Display medical records menu");
-            System.out.println("4. Quit");
+            System.out.println("4. Run demo");
+            System.out.println("5. Quit");
             System.out.println("===============================================");
             option = sc.nextInt();
 
@@ -33,22 +48,23 @@ public class MainMenu {
                 case 1:
                     System.out.println("You choose to display patients menu.");
                     System.out.println("===============================================");
-                    menu.menuPatient();
+                    dm.getPatientManager().menuPatient();
                     break;
                 case 2:
                     System.out.println("You choose to display doctors menu.");
                     System.out.println("===============================================");
-                    menu2.menuDoctor();
+                    dm.menuDoctor();
                     break;
                 case 3:
                     System.out.println("You choose to display medical records menu.");
                     System.out.println("===============================================");
-                    menu3.menuAppointment();
                     break;
                 case 4:
+                    MainMenu.test();
+                    break;
+                case 5:
                     System.out.println("You choose to quit.");
                     System.out.println("===============================================");
-                    menu4.menuBilling();
                     break;
                 default:
                     System.out.println("Please choose a valid option");

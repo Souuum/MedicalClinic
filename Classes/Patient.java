@@ -108,12 +108,12 @@ public class Patient extends Person {
 
     public String toJSON() {
         return "{\n" +
-                "  \"firstName\" : \"" + firstName + "\",\n" +
-                "  \"lastName\" : \"" + lastName + "\",\n" +
-                "  \"socialNumber\" : \"" + socialNumber + "\",\n" +
-                "  \"birthDate\" : \"" + birthDate + "\",\n" +
-                "  \"phoneNumber\" : \"" + phoneNumber + "\",\n" +
-                "  \"insuranceCompany\" : \"" + insuranceCompany + "\"\n" +
+                "  \"firstName\": \"" + firstName + "\",\n" +
+                "  \"lastName\": \"" + lastName + "\",\n" +
+                "  \"socialNumber\": \"" + socialNumber + "\",\n" +
+                "  \"birthDate\": \"" + birthDate + "\",\n" +
+                "  \"phoneNumber\": \"" + phoneNumber + "\",\n" +
+                "  \"insuranceCompany\": \"" + insuranceCompany + "\"\n" +
                 "}";
     }
 
