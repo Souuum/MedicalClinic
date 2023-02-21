@@ -18,9 +18,13 @@ public class MainMenu {
         dm.getPatientManager().addPatient(p1);
         dm.getPatientManager().listAllPatients();
         System.out.println("...........................");
-        System.out.println("Adding patient from JSON file");
+        System.out.println("imoprting patients from JSON file");
         dm.getPatientManager().addPatientByJSON("Data/patients.json");
         dm.getPatientManager().listAllPatients();
+        System.out.println("...........................");
+        System.out.println(" Importing doctors from JSON file");
+        dm.addDoctorByJSON("Data/doctors.json");
+        dm.listAllDoctors();
 
     }
 
