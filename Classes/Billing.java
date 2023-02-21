@@ -10,29 +10,12 @@ public class Billing {
     private ArrayList<String> services;
     private ArrayList<Double> costs;
 
-    public void menuBilling() {
-        int option = 0;
-        System.out.println("Choisissez une option :");
-
-        while (option != 5) {
-            System.out.println("1. Prendre rendez-vous");
-            System.out.println("2. Consulter mes rendez-vous");
-            System.out.println("3. Consulter mes factures");
-
-            option = sc.nextInt();
-            sc.nextLine();
-        }
-    }
-
     public Billing() {
     }
 
     public Billing(Patient p, Appointment a, Double c) {
         setPatient(p);
-        services = new ArrayList<>();
-        costs = new ArrayList<>();
-        services.add(a.getTreatment().getName());
-        costs.add(c);
+        addService(a.getService(), c);
     }
 
     public Patient getPatient() {
