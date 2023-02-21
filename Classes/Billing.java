@@ -1,99 +1,105 @@
 package Classes;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.text.*;
+import java.util.*;
 
 public class Billing {
 
-    private Scanner sc = new Scanner(System.in);
     private Patient patient;
-    private ArrayList<String> services;
-    private ArrayList<Double> costs;
+    private Doctor doctor;
+    private String date;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private double amount;
 
     public Billing() {
     }
 
-    public Billing(Patient p, Appointment a, Double c) {
-        setPatient(p);
-        addService(a.getService(), c);
+    public Billing(Patient patient, Doctor doctor, Date date, double amount) {
+        setPatient(patient);
+        setDoctor(doctor);
+        setDate(date);
+        setAmount(amount);
     }
 
     public Patient getPatient() {
-        return patient;
+        return this.patient;
     }
 
     public void setPatient(Patient patient) {
         try {
             if (patient == null) {
-                throw new IllegalArgumentException("Patient cannot be empty");
+                throw new NullPointerException();
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Error: Null value in Billing constructor");
             return;
         }
         this.patient = patient;
     }
 
-    public ArrayList<String> getServices() {
-        return services;
+    public Doctor getDoctor() {
+        return this.doctor;
     }
 
-    public ArrayList<Double> getCosts() {
-        return costs;
-    }
-
-    public void addService(String service, double cost) {
-        services.add(service);
-        costs.add(cost);
-    }
-
-    public void removeService(String service) {
-        int index = services.indexOf(service);
-        services.remove(index);
-        costs.remove(index);
-    }
-
-    public double getTotalCost() {
-        double total = 0;
-        for (double cost : costs) {
-            total += cost;
+    public void setDoctor(Doctor doctor) {
+        try {
+            if (doctor == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error: Null value in Billing constructor");
+            return;
         }
-        return total;
+        this.doctor = doctor;
+    }
+
+    public String getDate() {
+        return this.sdf.format(this.date);
+    }
+
+    public void setDate(Date date) {
+        try {
+            if (date == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error: Null value in Billing constructor");
+            return;
+        }
+        this.date = sdf.format(date);
+    }
+
+    public double getAmount() {
+        return this.amount;
+    }
+
+    public void setAmount(double amount) {
+        try {
+            if (amount < 0) {
+                throw new IllegalArgumentException("Amount cannot be negative");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        this.amount = amount;
     }
 
     public void printBill() {
-        System.out.println("Patient: " + patient.getFirstName() + " " + patient.getLastName());
-        System.out.println("Insurance Company: " + patient.getInsuranceCompany());
-        System.out.println("Services: ");
-        for (int i = 0; i < services.size(); i++) {
-            System.out.println(services.get(i) + " - $" + costs.get(i));
-        }
-        System.out.println("Total: $" + getTotalCost());
-    }
-
-    public void printMedicalHistory() {
-        System.out.println("Patient: " + patient.getFirstName() + " " + patient.getLastName());
-        System.out.println("Insurance Company: " + patient.getInsuranceCompany());
-        System.out.println("Medical History: ");
-        for (String medicalHistory : patient.getMedicalHistory()) {
-            System.out.println(medicalHistory);
-        }
-    }
-
-    public void printAppointmentHistory() {
-        System.out.println("Patient: " + patient.getFirstName() + " " + patient.getLastName());
-        System.out.println("Insurance Company: " + patient.getInsuranceCompany());
-        System.out.println("Appointment History: ");
-        for (Appointment appointment : patient.getAppointments()) {
-            System.out.println(appointment.getDate() + " - " + appointment.getDoctor().getFirstName() + " "
-                    + appointment.getDoctor().getLastName());
-        }
+        System.out.println(" Bill for " + this.patient.getName());
+        System.out.println(" Doctor: " + this.doctor.getName());
+        System.out.println(" Date: " + this.sdf.format(this.date));
+        System.out.println(" Amount: " + this.amount);
     }
 
     @Override
-
     public String toString() {
-        return "Billing{" + "patient=" + patient + ", services=" + services + ", costs=" + costs + '}';
+        return "{" +
+                " patient='" + getPatient() + "'" +
+                ", doctor='" + getDoctor() + "'" +
+                ", date='" + getDate() + "'" +
+                ", amount='" + getAmount() + "'" +
+                "}";
     }
 
 }

@@ -9,7 +9,6 @@ public class DoctorManager {
     private PatientManager pm;
     private static Scanner sc = new Scanner(System.in);
     private ArrayList<Patient> patients = new ArrayList<>();
-    private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
 
     public DoctorManager() {
@@ -195,6 +194,8 @@ public class DoctorManager {
     }
 
     public void createBillingForPatient() {
+        // first parameter is the patient, second is the doctor, third is the date,
+        // fourth is the amount
         System.out.println("Enter patient's social number : ");
         String socialNumber = sc.nextLine();
         Patient patient = null;
@@ -209,29 +210,36 @@ public class DoctorManager {
             return;
         }
 
-        System.out.println("Enter appointment date (dd/mm/yyyy) : ");
-        String date = sc.nextLine();
-        Appointment appointment = null;
-        for (Appointment a : appointments) {
-            if (a.getPatient().equals(patient) && a.getDate().equals(date)) {
-                appointment = a;
+        System.out.println("Enter doctor's social number : ");
+        socialNumber = sc.nextLine();
+        Doctor doctor = null;
+        for (Doctor d : doctors) {
+            if (d.getSocialNumber().equals(socialNumber)) {
+                doctor = d;
                 break;
             }
         }
 
-        if (appointment == null) {
-            System.out.println("No appointment found for this patient on this date");
+        if (doctor == null) {
+            System.out.println("Doctor not found");
             return;
         }
 
-        System.out.println("Enter amount : ");
-        double amount = sc.nextDouble();
-        Billing billing = new Billing(patient, appointment, amount);
-        billings.add(billing);
-        System.out.println("Billing created for " + patient.getFirstName() + " for an amount of " + amount + "€");
+        System.out.println("Enter the date of the appointment (dd/mm/yyyy) : ");
+        String date = sc.nextLine();
+        int year = Integer.parseInt(date.substring(6, 9));
+        int month = Integer.parseInt(date.substring(3, 5));
+        int day = Integer.parseInt(date.substring(0, 2));
+
+        System.out.println("Enter the amount of the billing : ");
+        double amount = Double.parseDouble(sc.nextLine());
+
+        billings.add(new Billing(patient, doctor, new Date(year - 1900, month - 1, day), amount));
+
     }
 
     public void listAllBillings() {
+        System.out.println("Loading billings...");
         if (billings.isEmpty()) {
             System.out.println("There are no billings");
         } else {

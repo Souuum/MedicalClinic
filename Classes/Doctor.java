@@ -11,31 +11,17 @@ public class Doctor extends Person {
 
     private String specialty;
     private Schedule schedule = new Schedule();
-    private ArrayList <Patient> patients = new ArrayList<>();
-    private ArrayList<Appointment> appointments;
-    private ArrayList<Billing> billings;
 
     public Doctor() {
     }
 
-    public Doctor(String f, String l, String s, Date d, String p, String sp, Schedule sc) {
-        super(f, l, s, d, p);
-        this.specialty = sp;
-        this.schedule = sc;
-    }
+    // public Doctor(String f, String l, String s, Date d, String p, String sp, Schedule sc) {
+    //     super(f, l, s, d, p);
+    // }
 
-    public Doctor(String f, String l, String s, Date d, String p, String sp) {
-        super(f, l, s, d, p);
+    public Doctor(String f, String l, String s, Date bd, String p, String sp) {
+        super(f, l, s, bd, p);
         setSpecialty(sp);
-        appointments = new ArrayList<>();
-        billings = new ArrayList<>();
-    }
-
-    public Doctor(String f, String l, String s, String d, String p, String sp) {
-        super(f, l, s, d, p);
-        setSpecialty(sp);
-        appointments = new ArrayList<>();
-        billings = new ArrayList<>();
     }
 
     public String getSpecialty() {

@@ -7,8 +7,6 @@ public class MainMenu {
     private static Scanner sc = new Scanner(System.in);
     private static PatientManager pm = new PatientManager();
     private static DoctorManager dm = new DoctorManager(pm);
-    private static Appointment menu3 = new Appointment();
-    private static Billing menu4 = new Billing();
 
     public static void test() {
         Patient p1 = new Patient("Jean", "Dupont", "03213452123", "03/11/1980", "0102030405", "Aetna");
