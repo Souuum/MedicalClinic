@@ -52,7 +52,7 @@ public class Test {
         pm.addPatient(p);
         pm.addPatient(p1);
 
-        pm.addPatientByJSON("Data/patients.json");
+        pm.addPatientByJSON();
 
         pm.writeFile("Data/patients2.json");
 
@@ -61,7 +61,7 @@ public class Test {
         dm.addDoctor(d);
         dm.addDoctor(doctor1);
 
-        dm.addDoctorByJSON("Data/doctors.json");
+        dm.addDoctorByJSON();
 
         dm.writeFile("Data/doctors2.json");
 

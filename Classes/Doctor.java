@@ -6,14 +6,10 @@ package Classes;
 
 import java.util.*;
 
-
 public class Doctor extends Person {
 
     private String specialty;
     private Schedule schedule = new Schedule();
-    private ArrayList <Patient> patients = new ArrayList<>();
-    private ArrayList<Appointment> appointments;
-    private ArrayList<Billing> billings;
 
     public Doctor() {
     }
@@ -27,15 +23,11 @@ public class Doctor extends Person {
     public Doctor(String f, String l, String s, Date d, String p, String sp) {
         super(f, l, s, d, p);
         setSpecialty(sp);
-        appointments = new ArrayList<>();
-        billings = new ArrayList<>();
     }
 
     public Doctor(String f, String l, String s, String d, String p, String sp) {
         super(f, l, s, d, p);
         setSpecialty(sp);
-        appointments = new ArrayList<>();
-        billings = new ArrayList<>();
     }
 
     public String getSpecialty() {

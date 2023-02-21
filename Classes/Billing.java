@@ -4,22 +4,39 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Billing {
-
-    private Scanner sc = new Scanner(System.in);
+    private Doctor doctor;
     private Patient patient;
+    private Appointment appointment;
     private ArrayList<String> services;
-    private ArrayList<Double> costs;
+    private double costs;
 
     public Billing() {
     }
 
-    public Billing(Patient p, Appointment a, Double c) {
-        setPatient(p);
-        addService(a.getService(), c);
+    public Billing(Appointment a, Double c) {
+        setPatient(a.getPatient());
+        setDoctor(a.getDoctor());
+        setAppointment(a);
     }
 
     public Patient getPatient() {
         return patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        try {
+            if (doctor == null) {
+                throw new IllegalArgumentException("Doctor cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        this.doctor = doctor;
     }
 
     public void setPatient(Patient patient) {
@@ -32,6 +49,22 @@ public class Billing {
             return;
         }
         this.patient = patient;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        try {
+            if (appointment == null) {
+                throw new IllegalArgumentException("Appointment cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        this.appointment = appointment;
     }
 
     public ArrayList<String> getServices() {

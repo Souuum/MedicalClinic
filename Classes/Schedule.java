@@ -19,6 +19,10 @@ public class Schedule {
         }
     }
 
+    public Week[] getSchedule() {
+        return this.schedule;
+    }
+
     public void addAppointment(Appointment appointment) {
         // Method which adds an appointment to the schedule
         // The method will check if the doctor is available at the time of the
@@ -37,6 +41,23 @@ public class Schedule {
         System.out.println(day);
         System.out.println(indexW);
         this.schedule[indexW].addAppointment(appointment, nday);
+    }
+
+    public Appointment[] getAllAppointments() {
+        // Method which returns all the appointments of the schedule
+        Appointment[] appointments = new Appointment[52 * 7 * 24];
+        int index = 0;
+        for (int i = 0; i < 52; i++) {
+            for (int j = 0; j < 7; j++) {
+                for (int k = 0; k < 24; k++) {
+                    if (this.schedule[i].getWeek()[j][k] != null) {
+                        appointments[index] = this.schedule[i].getWeek()[j][k];
+                        index++;
+                    }
+                }
+            }
+        }
+        return appointments;
     }
 
     public String toJSON() {

@@ -8,8 +8,6 @@ public class DoctorManager {
     private ArrayList<Doctor> doctors = new ArrayList<Doctor>();
     private PatientManager pm;
     private static Scanner sc = new Scanner(System.in);
-    private ArrayList<Patient> patients = new ArrayList<>();
-    private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
 
     public DoctorManager() {
@@ -40,8 +38,9 @@ public class DoctorManager {
         inFile.close();
     }
 
-    public void addDoctorByJSON(String fileName) {
+    public void addDoctorByJSON() {
         try {
+            String fileName = sc.nextLine();
             Scanner inFile = new Scanner(new File(fileName));
             String data = "";
             while (inFile.hasNext()) {
@@ -133,6 +132,8 @@ public class DoctorManager {
         String data = "";
         for (Doctor d : doctors) {
             data += d.toJSON() + ",";
+            System.out.println(data);
+
         }
         data = data.substring(0, data.length() - 1); // delete the last comma
         outFile.println(data + "\n]");
@@ -194,29 +195,63 @@ public class DoctorManager {
         return null;
     }
 
-    public void createBillingForPatient() {
+    public void createAppointmentForPatient() {
         System.out.println("Enter patient's social number : ");
         String socialNumber = sc.nextLine();
-        Patient patient = null;
-        for (Patient p : patients) {
-            if (p.getSocialNumber().equals(socialNumber)) {
-                patient = p;
-                break;
-            }
-        }
+        Patient patient = this.findPatient(socialNumber);
         if (patient == null) {
             System.out.println("Patient not found");
             return;
         }
-
+        System.out.println("Enter doctor's social number : ");
+        String doctorSocialNumber = sc.nextLine();
+        Doctor doctor = this.findDoctor(doctorSocialNumber);
+        if (doctor == null) {
+            System.out.println("Doctor not found");
+            return;
+        }
         System.out.println("Enter appointment date (dd/mm/yyyy) : ");
         String date = sc.nextLine();
-        Appointment appointment = null;
-        for (Appointment a : appointments) {
-            if (a.getPatient().equals(patient) && a.getDate().equals(date)) {
-                appointment = a;
-                break;
+        System.out.println("Enter appointment hour : ");
+        int hour = Integer.parseInt(sc.nextLine());
+
+        Appointment appointment = new Appointment(doctor, patient,
+                new Date(Integer.parseInt(date.substring(6, 10)) - 1900,
+                        Integer.parseInt(date.substring(3, 5)) - 1, Integer.parseInt(date.substring(0, 2))),
+                hour);
+        doctor.getSchedule().addAppointment(appointment);
+        System.out.println("Done !");
+    }
+
+    public void listAllAppointmentForPatient() {
+        System.out.println("Enter patient's social number : ");
+        String socialNumber = sc.nextLine();
+        Patient patient = this.findPatient(socialNumber);
+        if (patient == null) {
+            System.out.println("Patient not found");
+            return;
+        }
+        System.out.println("Looking into Doctor's schedules...");
+
+        for (Doctor d : doctors) {
+            for (Appointment a : d.getSchedule().getAllAppointments()) {
+                if (a != null) {
+                    if (a.getPatient().getSocialNumber().equals(socialNumber)) {
+                        System.out.println(a);
+                    }
+                }
+
             }
+        }
+    }
+
+    public void createBillingForPatient() {
+        System.out.println("Enter patient's social number : ");
+        String socialNumber = sc.nextLine();
+        Patient patient = this.findPatient(socialNumber);
+        if (patient == null) {
+            System.out.println("Patient not found");
+            return;
         }
 
         if (appointment == null) {
@@ -244,13 +279,7 @@ public class DoctorManager {
     public void searchBillings() {
         System.out.println("Enter patient's social number : ");
         String socialNumber = sc.nextLine();
-        Patient patient = null;
-        for (Patient p : patients) {
-            if (p.getSocialNumber().equals(socialNumber)) {
-                patient = p;
-                break;
-            }
-        }
+        Patient patient = this.findPatient(socialNumber);
         if (patient == null) {
             System.out.println("Patient not found");
             return;
@@ -275,22 +304,24 @@ public class DoctorManager {
         return pm;
     }
 
-    public void menuDoctor() {
+    public void menuDoctor() throws IOException {
         int option = 0;
         System.out.println("Choose an option :");
 
-        while (option != 11) {
+        while (option != 13) {
             System.out.println("1. List all doctors sort by first name");
             System.out.println("2. Search and display a doctor");
             System.out.println("3. Add a doctor");
             System.out.println("4. Add doctor by file");
-            System.out.println("5. Download doctor file");
-            System.out.println("6. Update a doctor");
-            System.out.println("7. Delete a doctor");
-            System.out.println("8. Create a billing for a patient");
-            System.out.println("9. List all billings");
-            System.out.println("10. Search and display all billing for a patient");
-            System.out.println("11. Return to main menu");
+            System.out.println("5. Delete a doctor");
+            System.out.println("6. Export doctors to JSON");
+            System.out.println("7. Import doctors from JSON file");
+            System.out.println("8. Create an appointment for a patient");
+            System.out.println("9. List all appointments for a patient");
+            System.out.println("10. List all billings");
+            System.out.println("11. Create a billing for a patient");
+            System.out.println("12. Search and display all billing for a patient");
+            System.out.println("13. Return to main menu");
             option = sc.nextInt();
             sc.nextLine();
 
@@ -312,31 +343,48 @@ public class DoctorManager {
                     addDoctorByFile();
                     break;
                 case 5:
-                    System.out.println("Export doctors as JSON");
-                    System.out.println("====================================");
-                    writeFile("Data/doctorsExport.json");
-                    break;
-                case 7:
                     System.out.println("Delete a doctor");
                     System.out.println("====================================");
                     deleteDoctor();
                     break;
-                case 8:
-                    System.out.println("Create a billing for a patient");
+                case 6:
+                    System.out.println("Export doctors to JSON");
                     System.out.println("====================================");
-                    createBillingForPatient();
+                    this.writeFile("Data/doctorsExport.json");
+                    break;
+                case 7:
+                    System.out.println("Import doctors from JSON");
+                    System.out.println("====================================");
+                    this.addDoctorByJSON();
+                    break;
+                case 8:
+                    System.out.println("Create an appointment for a patient");
+                    System.out.println("====================================");
+                    createAppointmentForPatient();
                     break;
                 case 9:
+                    System.out.println("List all appointments for a patient");
+                    System.out.println("====================================");
+                    listAllAppointmentForPatient();
+                    break;
+                case 10:
                     System.out.println("List all billings");
                     System.out.println("====================================");
                     listAllBillings();
                     break;
-                case 10:
+                case 11:
+                    System.out.println("Create a billing for a patient");
+                    System.out.println("====================================");
+                    createBillingForPatient();
+
+                    break;
+
+                case 12:
                     System.out.println("Search and display all billing for a patient");
                     System.out.println("====================================");
                     searchBillings();
                     break;
-                case 11:
+                case 13:
                     System.out.println("Return to main menu");
                     System.out.println("====================================");
                     break;

@@ -7,7 +7,6 @@ public class Patient extends Person {
 
     private String insuranceCompany;
     private ArrayList<String> medicalHistory;
-    private ArrayList<Appointment> appointments;
     private ArrayList<Billing> billings;
     PatientManager pm = new PatientManager();
 
@@ -17,7 +16,6 @@ public class Patient extends Person {
     public Patient(String f, String l, String s, Date date, String p, String i) {
         super(f, l, s, date, p);
         setInsuranceCompany(i);
-        appointments = new ArrayList<>();
         billings = new ArrayList<>();
         medicalHistory = new ArrayList<>();
     }
@@ -25,7 +23,6 @@ public class Patient extends Person {
     public Patient(String f, String l, String s, String d, String p, String i) {
         super(f, l, s, d, p);
         setInsuranceCompany(i);
-        appointments = new ArrayList<>();
         billings = new ArrayList<>();
         medicalHistory = new ArrayList<>();
     }
@@ -48,20 +45,8 @@ public class Patient extends Person {
         this.insuranceCompany = insuranceCompany;
     }
 
-    public ArrayList<Appointment> getAppointments() {
-        return appointments;
-    }
-
     public ArrayList<Billing> getBillings() {
         return billings;
-    }
-
-    public void addAppointment(Appointment appointment) {
-        appointments.add(appointment);
-    }
-
-    public void removeAppointment(Appointment appointment) {
-        appointments.remove(appointment);
     }
 
     public void addBilling(Billing billing) {
@@ -82,16 +67,6 @@ public class Patient extends Person {
 
     public void removeMedicalHistory(String history) {
         medicalHistory.remove(history);
-    }
-
-    public String hasAppointmentWithDoctor(Doctor doctor) {
-        for (Appointment appointment : appointments) {
-            if (appointment.getDoctor().equals(doctor)) {
-                return "Patient has an appointment with doctor " + doctor.getFirstName() + " " + doctor.getLastName()
-                        + " on " + appointment.getDate();
-            }
-        }
-        return "Patient has no appointment with doctor " + doctor.getFirstName() + " " + doctor.getLastName();
     }
 
     public String listBillings() {
