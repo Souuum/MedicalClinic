@@ -109,7 +109,9 @@ public class Appointment {
     public String toJSON() {
         return "{\n" +
                 "  \"doctor\" : \"" + doctor.getName() + "\",\n" +
+                "  \"doctor socialnumber\" : \"" + doctor.getSocialNumber() + "\",\n" +
                 "  \"patient\" : \"" + patient.getName() + "\",\n" +
+                "  \"patient socialnumber\" : \"" + patient.getSocialNumber() + "\",\n" +
                 "  \"date\" : \"" + date + "\",\n" +
                 "  \"hour\" : " + hour + "\n" +
                 "}";

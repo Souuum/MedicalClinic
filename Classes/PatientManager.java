@@ -47,7 +47,7 @@ public class PatientManager {
                 if (patientData.charAt(patientData.length() - 1) != '}') {
                     patientData += "}";
                 }
-                String firstName = patientData.substring(patientData.indexOf("firstName") + 12,
+                String firstName = patientData.substring(patientData.indexOf("firstName") + 14,
                         patientData.indexOf("lastName") - 5);
                 String lastName = patientData.substring(patientData.indexOf("lastName") + 13,
                         patientData.indexOf("socialNumber") - 5);
@@ -66,6 +66,20 @@ public class PatientManager {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
+    }
+
+    public Patient findPatient(String sn) {
+        System.out.println("looking for patient with socialnumber " + sn);
+        System.out.println(sn.length());
+        for (Patient p : patients) {
+            System.out.println(p.getSocialNumber());
+            System.out.println(p.getSocialNumber().length());
+
+            if (p.getSocialNumber().equals(sn)) {
+                return p;
+            }
+        }
+        return null;
     }
 
     public void addPatient(Patient p) {

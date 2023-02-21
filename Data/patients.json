@@ -3,14 +3,14 @@
   "firstName" : "John",
   "lastName" : "Doe",
   "socialNumber" : "123456789",
-  "birthDate" : "19/02/2023",
+  "birthDate" : "20/02/2023",
   "phoneNumber" : "123456789",
   "insuranceCompany" : "Aetna"
 },{
   "firstName" : "Hugo",
   "lastName" : "Soum",
   "socialNumber" : "89732193",
-  "birthDate" : "19/02/2023",
+  "birthDate" : "20/02/2023",
   "phoneNumber" : "87889799",
   "insuranceCompany" : "Aetna"
 }

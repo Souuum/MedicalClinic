@@ -11,7 +11,15 @@ import java.util.Date;
 public class DoctorManager {
 
     private ArrayList<Doctor> doctors = new ArrayList<Doctor>();
+    private PatientManager pm;
     private static Scanner sc = new Scanner(System.in);
+
+    public DoctorManager() {
+    }
+
+    public DoctorManager(PatientManager pm) {
+        this.pm = pm;
+    }
 
     public void addDoctorByFile(String fileName) throws FileNotFoundException {
         Scanner inFile = new Scanner(new File(fileName));
@@ -43,13 +51,8 @@ public class DoctorManager {
             data = data.substring(1, data.length() - 1);
             String[] doctorsData = data.split("},f");
 
-            for (String s : doctorsData) {
-                System.out.println(s);
-            }
-
             for (String doctorData : doctorsData) {
                 doctorData = doctorData.trim();
-                System.out.println(doctorData);
                 if (doctorData.charAt(doctorData.length() - 1) != '}') {
                     doctorData += "}";
                 }
@@ -67,11 +70,39 @@ public class DoctorManager {
                         doctorData.indexOf("schedule") - 5);
 
                 Doctor d = new Doctor(firstName, lastName, socialNumber, birthDate, phoneNumber, specialty);
+
+                // Schedule import
+
+                String scheduleData = doctorData.substring(doctorData.indexOf("schedule") + 13,
+                        doctorData.indexOf("]}"));
+                String[] sd = scheduleData.split("},");
+                sd[sd.length - 1] = sd[sd.length - 1].substring(0, sd[sd.length - 1].length() - 1); // getting rid of
+                                                                                                    // the la
+                                                                                                    // t }
+                for (String app : sd) {
+                    String sn = app.substring(app.indexOf("patient socialnumber") + 25, app.indexOf("date") - 5);
+                    Patient p = this.findPatient(sn);
+                    System.out.println(p);
+                    String date = app.substring(app.indexOf("date") + 9, app.indexOf("hour") - 5);
+                    int year = Integer.parseInt(date.substring(6, 9));
+                    int month = Integer.parseInt(date.substring(3, 5));
+                    int day = Integer.parseInt(date.substring(0, 2));
+                    String hour = app.substring(app.indexOf("hour") + 8, app.length());
+                    int h = Integer.parseInt(hour);
+
+                    d.getSchedule().addAppointment(new Appointment(d, p, new Date(year - 1900, month - 1, day), h));
+
+                }
                 doctors.add(d);
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
+
+    }
+
+    public Patient findPatient(String sn) {
+        return pm.findPatient(sn);
     }
 
     public void addDoctor(Doctor d) {
@@ -114,15 +145,27 @@ public class DoctorManager {
         doctors.sort((d1, d2) -> d1.getFirstName().compareTo(d2.getFirstName()));
     }
 
-    public void searchDoctor() {
+    public Doctor searchDoctor() {
         System.out.println("Enter the social number of the doctor you want to search for");
         String socialNumber = sc.nextLine();
         for (Doctor d : doctors) {
             if (d.getSocialNumber().equals(socialNumber)) {
                 System.out.println(d);
-                return;
+                return d;
             }
         }
+        System.out.println("no match");
+        return null;
+    }
+
+    public Doctor findDoctor(String sn) {
+        for (Doctor d : doctors) {
+            if (d.getSocialNumber() == sn) {
+                return d;
+            }
+        }
+        return null;
+    }
 
     public ArrayList<Doctor> getDoctors() {
         return doctors;

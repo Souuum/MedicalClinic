@@ -48,16 +48,6 @@ public class Test {
         System.out.println(d);
 
         PatientManager pm = new PatientManager();
-        DoctorManager dm = new DoctorManager();
-
-        dm.addDoctor(d);
-        dm.addDoctor(doctor1);
-
-        dm.writeFile("Data/doctors.json");
-
-        dm.addDoctorByJSON("Data/doctors.json");
-
-        dm.writeFile("Data/doctors2.json");
 
         pm.addPatient(p);
         pm.addPatient(p1);
@@ -68,9 +58,18 @@ public class Test {
 
         pm.writeFile("Data/patients2.json");
 
-        pm.listAllPatients();
+        DoctorManager dm = new DoctorManager(pm);
 
-        pm.menuPatient();
+        dm.addDoctor(d);
+        dm.addDoctor(doctor1);
+
+        dm.writeFile("Data/doctors.json");
+
+        dm.addDoctorByJSON("Data/doctors.json");
+
+        dm.writeFile("Data/doctors2.json");
+
+        System.out.println("done");
 
         // Date db1 = new Date();
         // Doctor d1 = new Doctor("John", "Doe", "123456789", db1, "1234567890", "yo",
