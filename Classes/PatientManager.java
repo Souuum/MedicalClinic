@@ -31,9 +31,12 @@ public class PatientManager {
         inFile.close();
     }
 
-    public void addPatientByJSON() {
+    public void addPatientByJSON(String fileName) {
         try {
-            String fileName = sc.nextLine();
+            if (fileName == null) {
+                System.out.println("Enter the file directory and don't forget the file extension .json");
+                fileName = sc.nextLine();
+            }
 
             Scanner inFile = new Scanner(new File(fileName));
             String data = "";
@@ -300,7 +303,7 @@ public class PatientManager {
                 case 7:
                     System.out.println("Import patients from JSON");
                     System.out.println("====================================");
-                    this.addPatientByJSON();
+                    this.addPatientByJSON("Data/patients.json");
                 case 8:
                     System.out.println("Return to main menu");
                     System.out.println("====================================");

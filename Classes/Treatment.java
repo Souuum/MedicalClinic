@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 
 public class Treatment {
 
-    private String name;
     private String description;
     private Doctor doctor;
     private Patient patient;
@@ -18,8 +17,7 @@ public class Treatment {
     public Treatment() {
     }
 
-    public Treatment(String n, String d, Doctor doc, Patient pat, Date da, Date de) {
-        setName(n);
+    public Treatment(String d, Doctor doc, Patient pat, Date da, Date de) {
         setDescription(d);
         setDoctor(doc);
         setPatient(pat);
@@ -27,20 +25,20 @@ public class Treatment {
         setDuration(da, de);
     }
 
-    public String getName() {
-        return this.name;
+    public Treatment(Appointment a, String d, String da, String de) {
+        setDescription(d);
+        setDoctor(a.getDoctor());
+        setPatient(a.getPatient());
+        setDate(da);
+        setDuration(da, de);
     }
 
-    public void setName(String name) {
-        try {
-            if (name == null || name.isEmpty()) {
-                throw new IllegalArgumentException("Name cannot be empty");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        this.name = name;
+    public Treatment(String d, Doctor doc, Patient pat, String da, String de) {
+        setDescription(d);
+        setDoctor(doc);
+        setPatient(pat);
+        setDate(da);
+        setDuration(da, de);
     }
 
     public String getDescription() {
@@ -108,6 +106,18 @@ public class Treatment {
         this.date = sdf.format(date);
     }
 
+    public void setDate(String date) {
+        try {
+            if (date == null || date.isEmpty()) {
+                throw new IllegalArgumentException("Date cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        this.date = date;
+    }
+
     public String getDuration() {
         return this.duration;
     }
@@ -116,6 +126,37 @@ public class Treatment {
         // set duration to the difference between date and dateEnd as a String with day
         // and weeks
         long diff = dateEnd.getTime() - date.getTime();
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        long diffWeeks = diffDays / 7;
+        diffDays = diffDays % 7;
+        if (diffWeeks > 0) {
+            duration = diffWeeks + " weeks and " + diffDays + " days";
+        } else {
+            duration = diffDays + " days";
+        }
+    }
+
+    public void setDuration(String date, String dateEnd) {
+        // set duration to the difference between date and dateEnd as a String with day
+        // and weeks
+        try {
+            if (date == null || date.isEmpty() || dateEnd == null || dateEnd.isEmpty()) {
+                throw new IllegalArgumentException("Date cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        Date d = null;
+        Date dE = null;
+        try {
+            d = sdf.parse(date);
+            dE = sdf.parse(dateEnd);
+        } catch (Exception e) {
+            System.out.println(e);
+            return;
+        }
+        long diff = dE.getTime() - d.getTime();
         long diffDays = diff / (24 * 60 * 60 * 1000);
         long diffWeeks = diffDays / 7;
         diffDays = diffDays % 7;
@@ -151,7 +192,7 @@ public class Treatment {
 
     @Override
     public String toString() {
-        return "Treatment{" + "name :" + name + ", description :" + description + ", doctor :" + doctor.getName()
+        return "Treatment{ description :" + description + ", doctor :" + doctor.getName()
                 + ", patient :"
                 + patient.getName() + ", date :" + date + ", duration :" + duration + ", drugs :" + drugs + '}';
     }

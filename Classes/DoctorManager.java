@@ -9,7 +9,7 @@ public class DoctorManager {
     private ArrayList<Doctor> doctors = new ArrayList<Doctor>();
     private PatientManager pm;
     private static Scanner sc = new Scanner(System.in);
-    private ArrayList<Appointment> appointments;
+    private ArrayList<Treatment> treatments = new ArrayList<Treatment>();
     private ArrayList<Billing> billings = new ArrayList<Billing>();
 
     public DoctorManager() {
@@ -40,9 +40,12 @@ public class DoctorManager {
         inFile.close();
     }
 
-    public void addDoctorByJSON() {
+    public void addDoctorByJSON(String fileName) {
         try {
-            String fileName = sc.nextLine();
+            if (fileName == null) {
+                System.out.println("Enter the file directory and don't forget the file extension .json");
+                fileName = sc.nextLine();
+            }
             Scanner inFile = new Scanner(new File(fileName));
             String data = "";
             while (inFile.hasNext()) {
@@ -308,6 +311,77 @@ public class DoctorManager {
         }
     }
 
+    public void createTreatmentForPatient() {
+        System.out.println("Enter patient's social number : ");
+        String socialNumber = sc.nextLine();
+        Patient patient = this.findPatient(socialNumber);
+        if (patient == null) {
+            System.out.println("Patient not found");
+            return;
+        }
+        System.out.println("Enter doctor's social number : ");
+        String doctorSocialNumber = sc.nextLine();
+        Doctor doctor = this.findDoctor(doctorSocialNumber);
+        if (doctor == null) {
+            System.out.println("Doctor not found");
+            return;
+        }
+        System.out.println("Enter appointment date (dd/mm/yyyy) : ");
+        String date = sc.nextLine();
+        System.out.println("Enter appointment hour : ");
+        int hour = Integer.parseInt(sc.nextLine());
+        for (Appointment a : doctor.getSchedule().getAllAppointments()) {
+            if (a != null) {
+                System.out.println(a);
+                if (a.getPatient().getSocialNumber().equals(socialNumber)
+                        && a.getDate().equals(date)
+                        && a.getHour() == hour) {
+                    System.out.println("Enter the Description : ");
+                    String desc = sc.nextLine();
+                    System.out.println("Enter the starting date");
+                    String startDate = sc.nextLine();
+                    System.out.println("Enter the ending date");
+                    String endDate = sc.nextLine();
+                    Treatment t = new Treatment(a, desc, startDate, endDate);
+                    treatments.add(t);
+                    System.out.println("Done !");
+                    return;
+                }
+            }
+
+        }
+        System.out.println("No match found !");
+
+    }
+
+    public void listAllTreatments() {
+        System.out.println("Loading treatments...");
+        if (treatments.isEmpty()) {
+            System.out.println("There are no treatments");
+        } else {
+            for (Treatment t : treatments) {
+                System.out.println(t);
+            }
+        }
+    }
+
+    public void listAllTreatmentForPatient() {
+        System.out.println("Enter patient's social number : ");
+        String socialNumber = sc.nextLine();
+        Patient patient = this.findPatient(socialNumber);
+        if (patient == null) {
+            System.out.println("Patient not found");
+            return;
+        }
+        System.out.println("Looking into Doctor's schedules...");
+
+        for (Treatment t : treatments) {
+            if (t.getPatient().getSocialNumber().equals(socialNumber)) {
+                System.out.println(t);
+            }
+        }
+    }
+
     public ArrayList<Doctor> getDoctors() {
         return doctors;
     }
@@ -324,7 +398,7 @@ public class DoctorManager {
         int option = 0;
         System.out.println("Choose an option :");
 
-        while (option != 13) {
+        while (option != 15) {
             System.out.println("1. List all doctors sort by first name");
             System.out.println("2. Search and display a doctor");
             System.out.println("3. Add a doctor");
@@ -337,7 +411,9 @@ public class DoctorManager {
             System.out.println("10. List all billings");
             System.out.println("11. Create a billing for a patient");
             System.out.println("12. Search and display all billing for a patient");
-            System.out.println("13. Return to main menu");
+            System.out.println("13. Create a treatment for a patient");
+            System.out.println("14. List all treatments for a patient");
+            System.out.println("15. Return to main menu");
             option = sc.nextInt();
             sc.nextLine();
 
@@ -371,7 +447,7 @@ public class DoctorManager {
                 case 7:
                     System.out.println("Import doctors from JSON");
                     System.out.println("====================================");
-                    this.addDoctorByJSON();
+                    this.addDoctorByJSON("Data/doctors.json");
                     break;
                 case 8:
                     System.out.println("Create an appointment for a patient");
@@ -399,6 +475,17 @@ public class DoctorManager {
                     searchBillings();
                     break;
                 case 13:
+                    System.out.println("Create a treatment for a patient");
+                    System.out.println("====================================");
+                    createTreatmentForPatient();
+                    break;
+                case 14:
+                    System.out.println("List all treatments for a patient");
+                    System.out.println("====================================");
+                    listAllTreatmentForPatient();
+                    break;
+
+                case 15:
                     System.out.println("Return to main menu");
                     System.out.println("====================================");
                     break;
