@@ -47,26 +47,28 @@ public class DoctorManager {
             }
             inFile.close();
             data = data.substring(1, data.length() - 1);
-            String[] doctorsData = data.split("\\},\\{\"f");
+            String[] doctorsData = data.split("\\},  \\{    \"f");
+            doctorsData[doctorsData.length - 1] = doctorsData[doctorsData.length - 1].substring(0,
+                    doctorsData[doctorsData.length - 1].length() - 3);
 
             for (String doctorData : doctorsData) {
-                System.out.println(doctorData);
                 doctorData = doctorData.trim();
                 if (doctorData.charAt(doctorData.length() - 1) != '}') {
                     doctorData += "}";
                 }
+
                 String firstName = doctorData.substring(doctorData.indexOf("firstName") + 13,
-                        doctorData.indexOf("lastName") - 5);
+                        doctorData.indexOf("lastName") - 7);
                 String lastName = doctorData.substring(doctorData.indexOf("lastName") + 12,
-                        doctorData.indexOf("socialNumber") - 5);
+                        doctorData.indexOf("socialNumber") - 7);
                 String socialNumber = doctorData.substring(doctorData.indexOf("socialNumber") + 16,
-                        doctorData.indexOf("birthDate") - 5);
+                        doctorData.indexOf("birthDate") - 7);
                 String birthDate = doctorData.substring(doctorData.indexOf("birthDate") + 13,
-                        doctorData.indexOf("phoneNumber") - 5);
+                        doctorData.indexOf("phoneNumber") - 7);
                 String phoneNumber = doctorData.substring(doctorData.indexOf("phoneNumber") + 15,
-                        doctorData.indexOf("specialty") - 5);
+                        doctorData.indexOf("specialty") - 7);
                 String specialty = doctorData.substring(doctorData.indexOf("specialty") + 13,
-                        doctorData.indexOf("schedule") - 5);
+                        doctorData.indexOf("schedule") - 7);
                 System.out.println("----------------------");
                 System.out.println("Adding doctor " + firstName + " " + lastName);
                 Doctor d = new Doctor(firstName, lastName, socialNumber, birthDate, phoneNumber, specialty);
@@ -83,14 +85,14 @@ public class DoctorManager {
                                                                                                         // the la
                                                                                                         // t }
                     for (String app : sd) {
-                        String sn = app.substring(app.indexOf("patient socialnumber") + 25, app.indexOf("date") - 5);
+                        String sn = app.substring(app.indexOf("patient socialnumber") + 24, app.indexOf("date") - 11);
                         Patient p = this.findPatient(sn);
                         System.out.println(p);
                         String date = app.substring(app.indexOf("date") + 8, app.indexOf("hour") - 5);
                         int year = Integer.parseInt(date.substring(6, 9));
                         int month = Integer.parseInt(date.substring(3, 5));
                         int day = Integer.parseInt(date.substring(0, 2));
-                        String hour = app.substring(app.indexOf("hour") + 7, app.length());
+                        String hour = app.substring(app.indexOf("hour") + 7, app.length() - 4).trim();
                         int h = Integer.parseInt(hour);
 
                         d.getSchedule().addAppointment(new Appointment(d, p, new Date(year - 1900, month - 1, day), h));
@@ -241,9 +243,6 @@ public class DoctorManager {
             }
         }
     }
-
-
-
 
     public ArrayList<Doctor> getDoctors() {
         return doctors;

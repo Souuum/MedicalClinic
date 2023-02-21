@@ -61,8 +61,6 @@ public class Test {
         dm.addDoctor(d);
         dm.addDoctor(doctor1);
 
-        dm.writeFile("Data/doctors.json");
-
         dm.addDoctorByJSON("Data/doctors.json");
 
         dm.writeFile("Data/doctors2.json");
