@@ -251,7 +251,7 @@ public class PatientManager {
             System.out.println("2. Search and display a patient");
             System.out.println("3. Add a patient");
             System.out.println("4. Add patient by file");
-            System.out.println("5. Delete a patientN");
+            System.out.println("5. Delete a patient");
             System.out.println("6. Export patients to JSON");
             System.out.println("7. Import patients from JSON");
             System.out.println("8. Return to main menu");
